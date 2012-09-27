@@ -1,0 +1,41 @@
+{
+  "name": "grunt-contrib-ember",
+  "description": "Manage and build your Ember.js apps with grunt.js",
+  "version": "0.0.1",
+  "homepage": "https://github.com/dgeb/grunt-contrib-ember",
+  "author": {
+    "name": "Dan Gebhardt",
+    "url": "http://cerebris.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dgeb/grunt-contrib-ember.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dgeb/grunt-contrib-ember/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/dgeb/grunt-contrib-ember/blob/master/LICENSE"
+    }
+  ],
+  "main": "grunt.js",
+  "engines": {
+    "node": "*"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "dependencies": {
+    "grunt-contrib-lib": "~0.3.0"
+  },
+  "devDependencies": {
+    "grunt": "~0.3.15",
+    "grunt-contrib-clean": "~0.3.0"
+  },
+  "keywords": [
+    "gruntplugin",
+    "ember"
+  ]
+}
