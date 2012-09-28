@@ -38,7 +38,7 @@ This option accepts a function which takes one argument (the template filepath) 
 ``` javascript
 options: {
   templateName: function(filename) {
-    return filename.toUpperCase();
+    return filename.replace(/path\/to\/templates\//, '');
   }
 }
 ```
@@ -50,7 +50,7 @@ ember_handlebars: {
   compile: {
     options: {
       templateName: function(filename) {
-        return filename.toUpperCase();
+        return filename.replace(/path\/to\//, '');
       }
     },
     files: {
