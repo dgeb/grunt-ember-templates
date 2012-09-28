@@ -1,5 +1,5 @@
 # grunt-contrib-ember [![Build Status](https://secure.travis-ci.org/dgeb/grunt-contrib-ember.png?branch=master)](http://travis-ci.org/dgeb/grunt-contrib-ember)
-> Precompile Handlebars templates for [Ember.js](http://emberjs.com).  Submitted by [Dan Gebhardt](/dgeb).
+> Precompile Handlebars templates for [Ember.js](http://emberjs.com).  Submitted by [Dan Gebhardt](https://github.com/dgeb).
 
 ## Getting Started
 Install this grunt plugin next to your project's [grunt.js gruntfile][getting_started] with: `npm install grunt-contrib-ember`
