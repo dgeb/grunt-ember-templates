@@ -49,7 +49,7 @@ module.exports = function(grunt) {
                                               'test/fixtures/simple.hbs',
                                               'test/fixtures/grandparent/parent/child.hbs']
         }
-      },
+      }
     },
 
     // Unit tests.
