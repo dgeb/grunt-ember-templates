@@ -27,17 +27,17 @@ module.exports = function(grunt) {
   // filename conversion for templates
   var defaultTemplateName = function(name) { return name; };
 
-  grunt.registerMultiTask('ember_handlebars', 'Compile handlebars templates and partials.', function() {
+  grunt.registerMultiTask('ember_handlebars', 'Compile Handlebars templates for Ember.', function() {
 
     var helpers = require('grunt-contrib-lib').init(grunt);
-    var options = helpers.options(this, {namespace: 'JST'});
+    var options = helpers.options(this, {});
 
     grunt.verbose.writeflags(options, 'Options');
 
     // TODO: ditch this when grunt v0.4 is released
     this.files = this.files || helpers.normalizeMultiTaskFiles(this.data, this.target);
 
-    var compiled, srcFiles, src, templateName;
+    var compiled, srcFiles, templateName;
     var templates = [];
     var output = [];
 
@@ -48,8 +48,6 @@ module.exports = function(grunt) {
     this.files.forEach(function(files) {
       srcFiles = grunt.file.expandFiles(files.src);
       srcFiles.forEach(function(file) {
-        src = grunt.file.read(file);
-
         // compile templates in a context with headless ember
         try {
           // create a context
