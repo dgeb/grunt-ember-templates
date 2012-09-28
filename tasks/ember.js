@@ -1,10 +1,10 @@
 /*
- * grunt-contrib-handlebars
+ * grunt-contrib-ember
  * http://gruntjs.com/
  *
- * Copyright (c) 2012 Tim Branyen, contributors
+ * Copyright (c) 2012 Dan Gebhardt, Tim Branyen, contributors
  * Licensed under the MIT license.
- * https://github.com/gruntjs/grunt-contrib-handlebars/blob/master/LICENSE-MIT
+ * https://github.com/dgeb/grunt-contrib-ember/blob/master/LICENSE
  */
 
 module.exports = function(grunt) {
@@ -16,17 +16,18 @@ module.exports = function(grunt) {
   var _ = grunt.util._;
   var helpers = require('grunt-contrib-lib').init(grunt);
 
+  var fs            = require('fs');
+  var vm            = require('vm');
+  var path          = require('path');
+
+  var libDir        = __dirname + '/../lib';
+  var headlessEmber = fs.readFileSync(libDir + '/headless-ember.js', 'utf8');
+  var emberJs       = fs.readFileSync(libDir + '/ember.js', 'utf8');
+
   // filename conversion for templates
-  var defaultProcessName = function(name) { return name; };
+  var defaultTemplateName = function(name) { return name; };
 
-  // filename conversion for partials
-  var defaultProcessPartialName = function(filePath) {
-    var pieces = _.last(filePath.split('/')).split('.');
-    var name   = _(pieces).without(_.last(pieces)).join('.'); // strips file extension
-    return name.substr(1, name.length);                       // strips leading _ character
-  };
-
-  grunt.registerMultiTask('handlebars', 'Compile handlebars templates and partials.', function() {
+  grunt.registerMultiTask('ember_handlebars', 'Compile handlebars templates and partials.', function() {
 
     var helpers = require('grunt-contrib-lib').init(grunt);
     var options = helpers.options(this, {namespace: 'JST'});
@@ -36,49 +37,45 @@ module.exports = function(grunt) {
     // TODO: ditch this when grunt v0.4 is released
     this.files = this.files || helpers.normalizeMultiTaskFiles(this.data, this.target);
 
-    var compiled, srcFiles, src, filename;
-    var partials = [];
+    var compiled, srcFiles, src, templateName;
     var templates = [];
     var output = [];
-    var nsInfo = helpers.getNamespaceDeclaration(options.namespace);
-
-    // assign regex for partial detection
-    var isPartial = options.partialRegex || /^_/;
 
     // assign filename transformation functions
-    var processName = options.processName || defaultProcessName;
-    var processPartialName = options.processName || defaultProcessPartialName;
+    var processTemplateName = options.templateName || defaultTemplateName;
 
-    // iterate files, processing partials and templates separately
+    // iterate files
     this.files.forEach(function(files) {
       srcFiles = grunt.file.expandFiles(files.src);
       srcFiles.forEach(function(file) {
         src = grunt.file.read(file);
 
+        // compile templates in a context with headless ember
         try {
-          compiled = require('handlebars').precompile(src);
-          // if configured to, wrap template in Handlebars.template call
-          if(options.wrapped) {
-            compiled = 'Handlebars.template('+compiled+')';
-          }
+          // create a context
+          var context = vm.createContext({
+            template: grunt.file.read(file)
+          });
+
+          // load headless ember
+          vm.runInContext(headlessEmber, context, 'headless-ember.js');
+          vm.runInContext(emberJs, context, 'ember.js');
+
+          // compile template with ember
+          vm.runInContext('compiledJS = precompileEmberHandlebars(template);', context);
+
+          compiled = context.compiledJS;
         } catch (e) {
           grunt.log.error(e);
-          grunt.fail.warn('Handlebars failed to compile '+file+'.');
+          grunt.fail.warn('Ember Handlebars failed to compile '+file+'.');
         }
 
-        // register partial or add template to namespace
-        if(isPartial.test(_.last(file.split('/')))) {
-          filename = processPartialName(file);
-          partials.push('Handlebars.registerPartial('+JSON.stringify(filename)+', '+compiled+');');
-        } else {
-          filename = processName(file);
-          templates.push(nsInfo.namespace+'['+JSON.stringify(filename)+'] = '+compiled+';');
-        }
+        templateName = processTemplateName(file.replace(/\.hbs|\.handlebars/, ''))
+        templates.push('Ember.TEMPLATES['+JSON.stringify(templateName)+'] = Ember.Handlebars.template('+compiled+');');
       });
-      output = output.concat(partials, templates);
+      output = output.concat(templates);
 
       if (output.length > 0) {
-        output.unshift(nsInfo.declaration);
         grunt.file.write(files.dest, output.join('\n\n'));
         grunt.log.writeln('File "' + files.dest + '" created.');
       }
