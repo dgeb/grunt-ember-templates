@@ -1,13 +1,15 @@
-# grunt-contrib-ember [![Build Status](https://secure.travis-ci.org/dgeb/grunt-contrib-ember.png?branch=master)](http://travis-ci.org/dgeb/grunt-contrib-ember)
-> Precompile Handlebars templates for [Ember.js](http://emberjs.com).  Submitted by [Dan Gebhardt](https://github.com/dgeb).
+# grunt-ember-templates [![Build Status](https://secure.travis-ci.org/dgeb/grunt-ember-templates.png?branch=master)](http://travis-ci.org/dgeb/grunt-ember-templates)
+
+> Precompile Handlebars templates for [Ember.js](http://emberjs.com).
 
 ## Getting Started
-Install this grunt plugin next to your project's [grunt.js gruntfile][getting_started] with: `npm install grunt-contrib-ember`
+
+Install this grunt plugin next to your project's [grunt.js gruntfile][getting_started] with: `npm install grunt-ember-templates`
 
 Then add this line to your project's `grunt.js` gruntfile:
 
 ```javascript
-grunt.loadNpmTasks('grunt-contrib-ember');
+grunt.loadNpmTasks('grunt-ember-templates');
 ```
 
 [grunt]: https://github.com/cowboy/grunt
@@ -15,7 +17,7 @@ grunt.loadNpmTasks('grunt-contrib-ember');
 
 ### Overview
 
-Inside your `grunt.js` file, add a section named `ember_handlebars`. This section specifies the files to compile and the options used with [handlebars](http://handlebarsjs.com/).
+Inside your `grunt.js` file, add a section named `ember_templates`. This section specifies the files to compile and the options used with [handlebars](http://handlebarsjs.com/).
 
 ##### files ```object```
 
@@ -33,12 +35,12 @@ This controls how this task operates and should contain key:value pairs, see opt
 
 ##### templateName ```function```
 
-This option accepts a function which takes one argument (the template filepath) and returns a string which will be used as the key for the precompiled template object.  The example below stores all templates on the default JST namespace in capital letters.
+This option accepts a function which takes one argument (the source template filepath) and returns a string which will be used as the key for the precompiled template object.  The example below stores all templates on the default JST namespace in capital letters.
 
 ``` javascript
 options: {
-  templateName: function(filename) {
-    return filename.replace(/path\/to\/templates\//, '');
+  templateName: function(sourceFile) {
+    return sourceFile.replace(/path\/to\/templates\//, '');
   }
 }
 ```
@@ -46,11 +48,11 @@ options: {
 #### Config Example
 
 ``` javascript
-ember_handlebars: {
+ember_templates: {
   compile: {
     options: {
-      templateName: function(filename) {
-        return filename.replace(/path\/to\//, '');
+      templateName: function(sourceFile) {
+        return sourceFile.replace(/path\/to\//, '');
       }
     },
     files: {
@@ -68,6 +70,11 @@ Many thanks to the following projects upon which this was based:
 * [grunt-contrib-handlebars](https://github.com/gruntjs/grunt-contrib-handlebars) by [Tim Branyen](https://github.com/tbranyen)
 * [grunt-ember-handlebars](https://github.com/yaymukund/grunt-ember-handlebars) by [Mukund Lakshman](https://github.com/yaymukund)
 
+I created this project as an alternative to grunt-ember-handlebars for the following reasons:
+* to provide maximum compatibility with the grunt-contrib project, using features such as destination:source file arguments
+* to allow for customizable template names based upon source file paths
+
 ## Release History
 
+* 2012/10/11 - v0.2.0 - Renamed grunt-ember-templates from grunt-contrib-ember.
 * 2012/09/28 - v0.1.0 - Initial release.

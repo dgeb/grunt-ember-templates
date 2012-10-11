@@ -1,10 +1,9 @@
 /*
- * grunt-contrib-ember
- * http://gruntjs.com/
+ * grunt-ember-templates
  *
  * Copyright (c) 2012 Dan Gebhardt, Tim Branyen, contributors
  * Licensed under the MIT license.
- * https://github.com/dgeb/grunt-contrib-ember/blob/master/LICENSE
+ * https://github.com/dgeb/grunt-ember-templates/blob/master/LICENSE
  */
 
 module.exports = function(grunt) {
@@ -27,7 +26,7 @@ module.exports = function(grunt) {
   // filename conversion for templates
   var defaultTemplateName = function(name) { return name; };
 
-  grunt.registerMultiTask('ember_handlebars', 'Compile Handlebars templates for Ember.', function() {
+  grunt.registerMultiTask('ember_templates', 'Compile Handlebars templates for Ember.', function() {
 
     var helpers = require('grunt-contrib-lib').init(grunt);
     var options = helpers.options(this, {});
@@ -68,7 +67,7 @@ module.exports = function(grunt) {
           grunt.fail.warn('Ember Handlebars failed to compile '+file+'.');
         }
 
-        templateName = processTemplateName(file.replace(/\.hbs|\.handlebars/, ''))
+        templateName = processTemplateName(file.replace(/\.hbs|\.handlebars/, ''));
         templates.push('Ember.TEMPLATES['+JSON.stringify(templateName)+'] = Ember.Handlebars.template('+compiled+');');
       });
       output = output.concat(templates);

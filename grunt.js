@@ -30,7 +30,7 @@ module.exports = function(grunt) {
     },
 
     // Configuration to be run (and then tested).
-    ember_handlebars: {
+    ember_templates: {
       default: {
         files: {
           'tmp/default.js': ['test/fixtures/text.hbs',
@@ -67,7 +67,7 @@ module.exports = function(grunt) {
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
   grunt.renameTask('test', 'nodeunit');
-  grunt.registerTask('test', 'clean ember_handlebars nodeunit');
+  grunt.registerTask('test', 'clean ember_templates nodeunit');
 
   // By default, lint and run all tests.
   grunt.registerTask('default', 'lint test');
