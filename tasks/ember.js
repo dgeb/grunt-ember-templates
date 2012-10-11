@@ -21,6 +21,7 @@ module.exports = function(grunt) {
 
   var libDir        = __dirname + '/../lib';
   var headlessEmber = fs.readFileSync(libDir + '/headless-ember.js', 'utf8');
+  var handlebarsJs  = fs.readFileSync(libDir + '/handlebars.js', 'utf8');
   var emberJs       = fs.readFileSync(libDir + '/ember.js', 'utf8');
 
   // filename conversion for templates
@@ -56,6 +57,7 @@ module.exports = function(grunt) {
 
           // load headless ember
           vm.runInContext(headlessEmber, context, 'headless-ember.js');
+          vm.runInContext(handlebarsJs, context, 'handlebars.js');
           vm.runInContext(emberJs, context, 'ember.js');
 
           // compile template with ember
