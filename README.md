@@ -56,10 +56,21 @@ ember_templates: {
       }
     },
     files: {
-      "path/to/result.js": "path/to/source.hbs",
-      "path/to/another.js": ["path/to/sources/*.hbs", "path/to/more/*.hbs"]
+      "path/to/result.js": "path/to/source.handlebars",
+      "path/to/another.js": ["path/to/sources/*.handlebars", "path/to/more/*.handlebars"]
     }
   }
+}
+```
+
+Here's an example task that watches for changes to your templates and automatically recompiles them:
+
+``` javascript
+watch: {
+  ember_templates: {
+    files: 'app/scripts/**/*.handlebars',
+    tasks: 'ember_templates reload'
+  },
 }
 ```
 
