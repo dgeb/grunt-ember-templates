@@ -3,11 +3,8 @@ module.exports = function(grunt) {
 
   // Project configuration.
   grunt.initConfig({
-    lint: {
-      all: ['grunt.js', 'tasks/*.js', '<config:nodeunit.tasks>']
-    },
-
     jshint: {
+      all: ['grunt.js', 'tasks/*.js', '<config:nodeunit.tasks>'],
       options: {
         curly: true,
         eqeqeq: true,
@@ -31,7 +28,7 @@ module.exports = function(grunt) {
 
     // Configuration to be run (and then tested).
     ember_templates: {
-      default: {
+      'default': {
         files: {
           'tmp/default.js': ['test/fixtures/text.hbs',
                              'test/fixtures/simple.hbs',
@@ -63,12 +60,13 @@ module.exports = function(grunt) {
 
   // The clean plugin helps in testing.
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-nodeunit');
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
-  grunt.renameTask('test', 'nodeunit');
-  grunt.registerTask('test', 'clean ember_templates nodeunit');
+  grunt.registerTask('test', ['clean', 'ember_templates', 'nodeunit']);
 
   // By default, lint and run all tests.
-  grunt.registerTask('default', 'lint test');
+  grunt.registerTask('default', ['jshint', 'test']);
 };
