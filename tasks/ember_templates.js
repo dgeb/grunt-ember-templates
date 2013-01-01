@@ -34,7 +34,7 @@ module.exports = function(grunt) {
     var processTemplateName = options.templateName || defaultTemplateName;
 
     // iterate files
-    this.file.srcRaw.forEach(function(file) {
+    this.file.src.forEach(function(file) {
       try {
         var context = vm.createContext({
           template: grunt.file.read(file)

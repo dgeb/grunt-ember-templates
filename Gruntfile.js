@@ -35,6 +35,11 @@ module.exports = function(grunt) {
                              'test/fixtures/grandparent/parent/child.hbs']
         }
       },
+      file_pattern_matching: {
+        files: {
+          'tmp/file_pattern_matching.js': 'test/fixtures/**/*.hbs'
+        }
+      },
       truncated_template_names: {
         options: {
           templateName: function(filename) {

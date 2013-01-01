@@ -11,6 +11,16 @@ exports.handlebars = {
 
     test.done();
   },
+  file_pattern_matching: function(test) {
+    'use strict';
+    test.expect(1);
+
+    var actual = grunt.file.read('tmp/file_pattern_matching.js');
+    var expected = grunt.file.read('test/expected/file_pattern_matching.js');
+    test.equal(actual, expected, 'should compile handlebars templates found by file pattern');
+
+    test.done();
+  },
   truncated_template_names: function(test) {
     'use strict';
     test.expect(1);
