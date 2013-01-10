@@ -89,6 +89,7 @@ I created this project as an alternative to grunt-ember-handlebars for the follo
 
 ## Release History
 
+* 2013/01/10 - v0.4.2rc5 - Updated dependencies to be compatible with grunt 0.4.0rc5 - thanks @trev!
 * 2013/01/01 - v0.4.1 - Fixed file pattern matching
 * 2012/12/26 - v0.4.0 - Upgraded for grunt 0.4.0 compatibility - thanks @trek!
 * 2012/10/11 - v0.2.0 - Renamed grunt-ember-templates from grunt-contrib-ember.
