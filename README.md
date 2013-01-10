@@ -4,7 +4,7 @@
 
 ## Getting Started
 
-*Important: the latest version of this plugin is only compatible with grunt.js 0.4. For compatibility with grunt.js 0.3, please use v0.2.0 of this plugin.*
+*Important: the latest version of this plugin is only compatible with grunt.js 0.4.0rc5. For compatibility with grunt.js 0.3, please use v0.2.0 of this plugin.*
 
 Install this grunt plugin next to your project's [grunt.js gruntfile][getting_started] with: `npm install grunt-ember-templates`
 
