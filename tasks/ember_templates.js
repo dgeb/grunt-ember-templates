@@ -34,38 +34,40 @@ module.exports = function(grunt) {
     var processTemplateName = options.templateName || defaultTemplateName;
 
     // iterate files
-    this.file.src.forEach(function(file) {
-      try {
-        var context = vm.createContext({
-          template: grunt.file.read(file)
-        });
+    this.files.forEach(function(f) {
+      f.src.forEach(function(file) {
+        try {
+          var context = vm.createContext({
+            template: grunt.file.read(file)
+          });
 
-        // load headless ember
-        vm.runInContext(headlessEmber, context, 'headless-ember.js');
-        vm.runInContext(handlebarsJs, context, 'handlebars.js');
-        vm.runInContext(emberJs, context, 'ember.js');
+          // load headless ember
+          vm.runInContext(headlessEmber, context, 'headless-ember.js');
+          vm.runInContext(handlebarsJs, context, 'handlebars.js');
+          vm.runInContext(emberJs, context, 'ember.js');
 
-        // compile template with ember
-        vm.runInContext('compiledJS = precompileEmberHandlebars(template);', context);
-        compiled = context.compiledJS;
+          // compile template with ember
+          vm.runInContext('compiledJS = precompileEmberHandlebars(template);', context);
+          compiled = context.compiledJS;
 
-      } catch(e) {
-        grunt.log.error(e);
-        grunt.fail.warn('Ember Handlebars failed to compile '+file+'.');
-      
+        } catch(e) {
+          grunt.log.error(e);
+          grunt.fail.warn('Ember Handlebars failed to compile '+file+'.');
+        
+        }
+
+        templateName = processTemplateName(file.replace(/\.hbs|\.handlebars/, ''));
+        templates.push('Ember.TEMPLATES['+JSON.stringify(templateName)+'] = Ember.Handlebars.template('+compiled+');');
+      });
+
+      output = output.concat(templates);
+
+      if (output.length > 0) {
+        grunt.file.write(f.dest, output.join('\n\n'));
+        grunt.log.writeln('File "' + f.dest + '" created.');
       }
 
-      templateName = processTemplateName(file.replace(/\.hbs|\.handlebars/, ''));
-      templates.push('Ember.TEMPLATES['+JSON.stringify(templateName)+'] = Ember.Handlebars.template('+compiled+');');
-    
     });
-
-    output = output.concat(templates);
-
-    if (output.length > 0) {
-      grunt.file.write(this.file.dest, output.join('\n\n'));
-      grunt.log.writeln('File "' + this.file.dest + '" created.');
-    }
   });
 
 };
