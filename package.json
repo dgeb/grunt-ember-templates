@@ -1,7 +1,7 @@
 {
   "name": "grunt-ember-templates",
   "description": "Compile Handlebars templates for Ember in Grunt. Features destination:source file arguments and customizable template names.",
-  "version": "0.4.2rc5",
+  "version": "0.4.2rc7",
   "homepage": "https://github.com/dgeb/grunt-ember-templates",
   "author": {
     "name": "Dan Gebhardt",
@@ -28,10 +28,10 @@
     "test": "grunt test"
   },
   "devDependencies": {
-    "grunt": "~0.4.0rc5",
-    "grunt-contrib-jshint": "~0.1.1rc5",
-    "grunt-contrib-nodeunit": "0.1.2rc5",
-    "grunt-contrib-clean": "~0.4.0rc5",
+    "grunt": "0.4.0rc7",
+    "grunt-contrib-jshint": "0.1.1rc6",
+    "grunt-contrib-nodeunit": "0.1.2rc6",
+    "grunt-contrib-clean": "0.4.0rc6",
     "grunt-contrib-internal": "*"
   },
   "keywords": [
