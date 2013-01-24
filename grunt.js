@@ -65,7 +65,6 @@ module.exports = function(grunt) {
 
   // The clean plugin helps in testing.
   grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
