@@ -89,6 +89,7 @@ I created this project as an alternative to grunt-ember-handlebars for the follo
 
 ## Release History
 
+* 2013/02/06 - v0.4.3rc7 - Updated to latest handlebars for compatibility with latest ember - thanks @codeofficer!
 * 2013/01/24 - v0.4.2rc7 - Upgraded for grunt 0.4.0rc7 and handlebars 1.0.rc.2 - thanks @GManzato!
 * 2013/01/10 - v0.4.2rc5 - Upgraded for grunt 0.4.0rc5 - thanks @trev!
 * 2013/01/01 - v0.4.1 - Fixed file pattern matching
