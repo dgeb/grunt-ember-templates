@@ -9,14 +9,12 @@
 module.exports = function(grunt) {
   'use strict';
 
-  var fs            = require('fs');
-  var vm            = require('vm');
-  var path          = require('path');
+  var fs                 = require('fs');
+  var vm                 = require('vm');
+  var path               = require('path');
 
-  var libDir        = __dirname + '/../lib';
-  var headlessEmber = fs.readFileSync(libDir + '/headless-ember.js', 'utf8');
-  var handlebarsJs  = fs.readFileSync(libDir + '/handlebars.js', 'utf8');
-  var emberJs       = fs.readFileSync(libDir + '/ember.js', 'utf8');
+  var libDir             = __dirname + '/../lib';
+  var templateCompilerJs = fs.readFileSync(libDir + '/ember-template-compiler.js', 'utf8');
 
   // filename conversion for templates
   var defaultTemplateName = function(name) { return name; };
@@ -26,7 +24,7 @@ module.exports = function(grunt) {
 
     grunt.verbose.writeflags(options, 'Options');
 
-    var compiled, srcFiles, templateName;
+    var compiled, templateName;
     var templates = [];
     var output = [];
 
@@ -37,23 +35,24 @@ module.exports = function(grunt) {
     this.files.forEach(function(f) {
       f.src.forEach(function(file) {
         try {
+          // Create a context into which we will load both the ember template compiler
+          // as well as the template to be compiled. The ember template compiler expects
+          // `exports` to be defined, and uses it to export `precompile()`.
           var context = vm.createContext({
+            exports: {},
             template: grunt.file.read(file)
           });
 
-          // load headless ember
-          vm.runInContext(headlessEmber, context, 'headless-ember.js');
-          vm.runInContext(handlebarsJs, context, 'handlebars.js');
-          vm.runInContext(emberJs, context, 'ember.js');
+          // Load the ember template compiler.
+          vm.runInContext(templateCompilerJs, context, 'ember-template-compiler.js');
 
-          // compile template with ember
-          vm.runInContext('compiledJS = precompileEmberHandlebars(template);', context);
+          // Compile the template.
+          vm.runInContext('compiledJS = exports.precompile(template);', context);
           compiled = context.compiledJS;
 
         } catch(e) {
           grunt.log.error(e);
-          grunt.fail.warn('Ember Handlebars failed to compile '+file+'.');
-        
+          grunt.fail.warn('Ember Handlebars failed to compile ' + file + '.');
         }
 
         templateName = processTemplateName(file.replace(/\.hbs|\.handlebars/, ''));

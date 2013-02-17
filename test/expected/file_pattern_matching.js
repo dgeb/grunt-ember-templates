@@ -1,5 +1,5 @@
 Ember.TEMPLATES["test/fixtures/grandparent/parent/child"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
-this.compiledVersion = '1.0.rc.2';
+this.compilerInfo = [2,'>= 1.0.0-rc.3'];
 helpers = helpers || Ember.Handlebars.helpers; data = data || {};
   
 
@@ -9,7 +9,7 @@ helpers = helpers || Ember.Handlebars.helpers; data = data || {};
 });
 
 Ember.TEMPLATES["test/fixtures/simple"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
-this.compiledVersion = '1.0.rc.2';
+this.compilerInfo = [2,'>= 1.0.0-rc.3'];
 helpers = helpers || Ember.Handlebars.helpers; data = data || {};
   var buffer = '', hashTypes, escapeExpression=this.escapeExpression;
 
@@ -23,7 +23,7 @@ helpers = helpers || Ember.Handlebars.helpers; data = data || {};
 });
 
 Ember.TEMPLATES["test/fixtures/text"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
-this.compiledVersion = '1.0.rc.2';
+this.compilerInfo = [2,'>= 1.0.0-rc.3'];
 helpers = helpers || Ember.Handlebars.helpers; data = data || {};
   
 
