@@ -14,6 +14,7 @@ module.exports = function(grunt) {
   var path               = require('path');
 
   var libDir             = __dirname + '/../lib';
+  var handlebarsJs       = fs.readFileSync(libDir + '/handlebars.js', 'utf8');
   var templateCompilerJs = fs.readFileSync(libDir + '/ember-template-compiler.js', 'utf8');
 
   // filename conversion for templates
@@ -28,10 +29,10 @@ module.exports = function(grunt) {
     var templates = [];
     var output = [];
 
-    // assign filename transformation functions
+    // Assign filename transformation functions
     var processTemplateName = options.templateName || defaultTemplateName;
 
-    // iterate files
+    // Iterate files
     this.files.forEach(function(f) {
       f.src.forEach(function(file) {
         try {
@@ -43,10 +44,13 @@ module.exports = function(grunt) {
             template: grunt.file.read(file)
           });
 
-          // Load the ember template compiler.
+          // Load handlebars
+          vm.runInContext(handlebarsJs, context, 'handlebars.js');
+
+          // Load the ember template compiler
           vm.runInContext(templateCompilerJs, context, 'ember-template-compiler.js');
 
-          // Compile the template.
+          // Compile the template
           vm.runInContext('compiledJS = exports.precompile(template);', context);
           compiled = context.compiledJS;
 
