@@ -6,7 +6,7 @@
 
 Install this grunt plugin next to your project's [grunt.js gruntfile][getting_started] with: `npm install grunt-ember-templates`
 
-Then add this line to your project's `grunt.js` gruntfile:
+Then add this line to your project's `Gruntfile.js` gruntfile:
 
 ```javascript
 grunt.loadNpmTasks('grunt-ember-templates');
@@ -17,7 +17,7 @@ grunt.loadNpmTasks('grunt-ember-templates');
 
 ### Overview
 
-Inside your `grunt.js` file, add a section named `ember_templates`. This section specifies the files to compile and the options used with [handlebars](http://handlebarsjs.com/).
+Inside your `Gruntfile.js` file, add a section named `ember_templates`. This section specifies the files to compile and the options used with [handlebars](http://handlebarsjs.com/).
 
 ##### files ```object```
 
@@ -69,7 +69,7 @@ Here's an example task that watches for changes to your templates and automatica
 watch: {
   ember_templates: {
     files: 'app/scripts/**/*.handlebars',
-    tasks: 'ember_templates reload'
+    tasks: ['ember_templates', 'livereload']
   },
 }
 ```
