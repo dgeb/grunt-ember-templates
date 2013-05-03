@@ -87,6 +87,7 @@ I created this project as an alternative to grunt-ember-handlebars for the follo
 
 ## Release History
 
+* 2013/05/03 - v0.4.5 - Fixed multi-file output - thanks @seankeating!
 * 2013/04/05 - v0.4.4 - Ember v1.0.0-rc.2 compatible.
 * 2013/02/18 - v0.4.3 - Upgraded to grunt 0.4.0 final.
 * 2013/02/17 - v0.4.3rc8 - Now uses ember-template-compiler. Upgraded to grunt 0.4.0.rc8.
