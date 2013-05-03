@@ -26,14 +26,15 @@ module.exports = function(grunt) {
     grunt.verbose.writeflags(options, 'Options');
 
     var compiled, templateName;
-    var templates = [];
-    var output = [];
 
     // Assign filename transformation functions
     var processTemplateName = options.templateName || defaultTemplateName;
 
     // Iterate files
     this.files.forEach(function(f) {
+      var templates = [];
+      var output = [];
+
       f.src.forEach(function(file) {
         try {
           // Create a context into which we will load both the ember template compiler
