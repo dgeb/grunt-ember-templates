@@ -61,7 +61,13 @@ module.exports = function(grunt) {
         }
 
         templateName = processTemplateName(file.replace(/\.hbs|\.handlebars/, ''));
-        templates.push('Ember.TEMPLATES['+JSON.stringify(templateName)+'] = Ember.Handlebars.template('+compiled+');');
+
+        // Is it a partial?
+        if (templateName.split('/').pop()[0] === '_') {
+          templates.push('Ember.Handlebars.registerPartial('+JSON.stringify(templateName)+', Ember.Handlebars.template('+compiled+'));');
+        } else {
+          templates.push('Ember.TEMPLATES['+JSON.stringify(templateName)+'] = Ember.Handlebars.template('+compiled+');');
+        }
       });
 
       output = output.concat(templates);
