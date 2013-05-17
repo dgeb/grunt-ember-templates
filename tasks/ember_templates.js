@@ -64,7 +64,6 @@ module.exports = function(grunt) {
 
         // Is it a partial?
         if (templateName.split('/').pop()[0] === '_') {
-          console.log(templateName);
           templates.push('Ember.Handlebars.registerPartial('+JSON.stringify(templateName)+', Ember.Handlebars.template('+compiled+'));');
         } else {
           templates.push('Ember.TEMPLATES['+JSON.stringify(templateName)+'] = Ember.Handlebars.template('+compiled+');');
