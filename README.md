@@ -17,7 +17,7 @@ grunt.loadNpmTasks('grunt-ember-templates');
 
 ### Overview
 
-Inside your `Gruntfile.js` file, add a section named `ember_templates`. This section specifies the files to compile and the options used with [handlebars](http://handlebarsjs.com/).
+Inside your `Gruntfile.js` file, add a section named `emberTemplates`. This section specifies the files to compile and the options used with [handlebars](http://handlebarsjs.com/).
 
 ##### files ```object```
 
@@ -48,7 +48,7 @@ options: {
 #### Config Example
 
 ``` javascript
-ember_templates: {
+emberTemplates: {
   compile: {
     options: {
       templateName: function(sourceFile) {
@@ -67,9 +67,9 @@ Here's an example task that watches for changes to your templates and automatica
 
 ``` javascript
 watch: {
-  ember_templates: {
+  emberTemplates: {
     files: 'app/scripts/**/*.handlebars',
-    tasks: ['ember_templates', 'livereload']
+    tasks: ['emberTemplates', 'livereload']
   },
 }
 ```
@@ -87,6 +87,7 @@ I created this project as an alternative to grunt-ember-handlebars for the follo
 
 ## Release History
 
+* 2013/05/22 - v0.4.7 - Deprecate `ember_templates` task in favor of `emberTemplates`.
 * 2013/05/16 - v0.4.6 - Upgraded Handlebars to 1.0.0-rc4.
 * 2013/05/03 - v0.4.5 - Fixed multi-file output - thanks @seankeating!
 * 2013/04/05 - v0.4.4 - Ember v1.0.0-rc.2 compatible.

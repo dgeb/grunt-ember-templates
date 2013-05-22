@@ -20,7 +20,7 @@ module.exports = function(grunt) {
   // filename conversion for templates
   var defaultTemplateName = function(name) { return name; };
 
-  grunt.registerMultiTask('ember_templates', 'Compile Handlebars templates for Ember.', function() {
+  var emberTemplatesTask = function() {
     var options = this.options({});
 
     grunt.verbose.writeflags(options, 'Options');
@@ -72,6 +72,13 @@ module.exports = function(grunt) {
       }
 
     });
-  });
+  };
 
+  grunt.registerMultiTask('emberTemplates', 'Compile Handlebars templates for Ember.', emberTemplatesTask);
+
+  // TODO: remove deprecated `ember_templates` task from v0.5
+  grunt.registerMultiTask('ember_templates', 'Compile Handlebars templates for Ember. [DEPRECATED: please use `emberTemplates` instead]', function() {
+    grunt.log.warn('`ember_templates` is deprecated and will be removed in v0.5. Please use `emberTemplates` instead.');
+    emberTemplatesTask.apply(this, arguments);
+  });
 };
