@@ -40,7 +40,10 @@ This controls how this task operates and should contain key:value pairs, see opt
 
 ##### templateName ```function```
 
-This option accepts a function which takes one argument (the source template filepath) and returns a string which will be used as the key for the precompiled template object.  The example below stores all templates on the default JST namespace in capital letters.
+This option accepts a function which takes one argument (the source template
+filepath) and returns a string which will be used as the key for the precompiled
+template object. The example below strips away the root path from templates so
+their names will match Ember's conventions:
 
 ``` javascript
 options: {
