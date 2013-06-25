@@ -95,6 +95,7 @@ I created this project as an alternative to grunt-ember-handlebars for the follo
 
 ## Release History
 
+* 2013/06/25 - v0.4.10 - Upgraded Handlebars to 1.0.0.
 * 2013/06/24 - v0.4.9 - Upgraded ember-template-compiler.js to 1.0.0-rc.6
 * 2013/06/09 - v0.4.8 - Upgraded ember-template-compiler.js to 1.0.0-rc.5 - thanks @AdamFerguson!
 * 2013/05/22 - v0.4.7 - Deprecate `ember_templates` task in favor of `emberTemplates`.
