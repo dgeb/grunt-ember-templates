@@ -28,7 +28,13 @@ module.exports = function(grunt) {
     var compiled, templateName;
 
     // Assign filename transformation functions
-    var processTemplateName = options.templateName || defaultTemplateName;
+    var processTemplateName = options.templateName || defaultTemplateName,
+        pre = '', post = '';
+
+    if (options.amd) {
+      pre = 'define(["Ember"],function(Ember){';
+      post = '});';
+    }
 
     // Iterate files
     this.files.forEach(function(f) {
@@ -61,7 +67,7 @@ module.exports = function(grunt) {
         }
 
         templateName = processTemplateName(file.replace(/\.hbs|\.handlebars/, ''));
-        templates.push('Ember.TEMPLATES['+JSON.stringify(templateName)+'] = Ember.Handlebars.template('+compiled+');');
+        templates.push(pre + 'Ember.TEMPLATES['+JSON.stringify(templateName)+'] = Ember.Handlebars.template('+compiled+');' + post);
       });
 
       output = output.concat(templates);
