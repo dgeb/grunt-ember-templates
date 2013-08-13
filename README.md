@@ -18,8 +18,6 @@ Once the plugin has been installed, it may be enabled inside your Gruntfile with
 grunt.loadNpmTasks('grunt-ember-templates');
 ```
 
-*This plugin was designed to work with Grunt 0.4.x. If you're still using grunt v0.3.x it's strongly recommended that [you upgrade](http://gruntjs.com/upgrading-from-0.3-to-0.4), but in case you can't please use [v0.3.2](https://github.com/dgeb/grunt-ember-templates/tree/grunt-0.3-stable).*
-
 ### Overview
 
 Inside your `Gruntfile.js` file, add a section named `emberTemplates`. This section specifies the files to compile and the options used with [handlebars](http://handlebarsjs.com/).
@@ -81,6 +79,20 @@ watch: {
   },
 }
 ```
+
+### Usage Tips
+
+* This plugin was designed to work with Grunt 0.4.x. If you're still using grunt
+  v0.3.x it's strongly recommended that [you upgrade](http://gruntjs.com/upgrading-from-0.3-to-0.4),
+  but in case you can't please use [v0.3.2](https://github.com/dgeb/grunt-ember-templates/tree/grunt-0.3-stable).
+
+* Check the *Release History* below for version compatibility with Ember and
+  Handlebars. The latest version of this plugin tends to track ember-latest, so
+  you may need an older version to work with the latest *official release* of Ember.
+
+* Remember to name partial templates with a leading underscore. This underscore
+  will be preserved in the compiled template name. For instance,
+  `post/_edit.hbs` will be registered as `Ember.TEMPLATES["post/_edit"]`.
 
 ## Credit
 
