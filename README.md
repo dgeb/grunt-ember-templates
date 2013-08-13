@@ -36,6 +36,17 @@ This controls how this task operates and should contain key:value pairs, see opt
 
 #### Options
 
+##### amd ```boolean```
+
+Include this option to ensure that the compiled output will be wrapped as an
+AMD module.
+
+``` javascript
+options: {
+  amd: true
+}
+```
+
 ##### templateName ```function```
 
 This option accepts a function which takes one argument (the source template
