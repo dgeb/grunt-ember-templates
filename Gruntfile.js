@@ -35,6 +35,16 @@ module.exports = function(grunt) {
                              'test/fixtures/grandparent/parent/child.hbs']
         }
       },
+      amd: {
+        options: {
+          amd: true
+        },
+        files: {
+          'tmp/amd.js': ['test/fixtures/text.hbs',
+                         'test/fixtures/simple.hbs',
+                         'test/fixtures/grandparent/parent/child.hbs']
+        }
+      },
       file_pattern_matching: {
         files: {
           'tmp/file_pattern_matching.js': 'test/fixtures/**/*.hbs'

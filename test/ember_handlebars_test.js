@@ -11,6 +11,16 @@ exports.handlebars = {
 
     test.done();
   },
+  amd: function(test) {
+    'use strict';
+    test.expect(1);
+
+    var actual = grunt.file.read('tmp/amd.js');
+    var expected = grunt.file.read('test/expected/amd.js');
+    test.equal(actual, expected, 'should compile handlebars templates with AMD wrappers');
+
+    test.done();
+  },
   file_pattern_matching: function(test) {
     'use strict';
     test.expect(1);
