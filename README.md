@@ -47,30 +47,78 @@ options: {
 }
 ```
 
-##### templateName ```function```
+##### templateBaseDir ```regex | string```
 
-This option accepts a function which takes one argument (the source template
-filepath) and returns a string which will be used as the key for the precompiled
-template object. The example below strips away the root path from templates so
-their names will match Ember's conventions:
+A regex or string to match the base path to your template directory. By default,
+this option is not defined.
+
+If defined, this path will be stripped out of template names by the default
+implementation of `templateNameFromFile()`.
 
 ``` javascript
 options: {
-  templateName: function(sourceFile) {
-    return sourceFile.replace(/path\/to\/templates\//, '');
+  templateBaseDir: /path\/to\/templates\//;
+}
+```
+
+##### templateFileExtensions ```regex | string```
+
+A regex or string to match the file extensions for your templates. By default,
+this option is `/\.hbs|\.handlebars/`.
+
+Extensions will be stripped out of template names by the default implementation
+of `templateNameFromFile()`.
+
+For example, if you're using a non-standard extension for your template files,
+you can strip it out like so:
+
+``` javascript
+options: {
+  templateFileExtensions: /\.hbars/;
+}
+```
+
+##### templateName ```function```
+
+This option accepts a function which takes one argument (the source template
+filepath, which has already been stripped of its file extensions and base directory)
+and returns a string which will be used as the key for the precompiled template.
+
+For example, let's say that all of your templates are suffixed with `_template`,
+which you don't want included in the actual template name. You could strip off
+this suffix as follows:
+
+``` javascript
+options: {
+  templateName: function(name) {
+    return name.replace('_template', '');
   }
 }
 ```
 
+##### templateNameFromFile ```function```
+
+This option accepts a function which takes one argument (the full source template
+filepath) and returns a string which will be used as the key for the precompiled
+template object.
+
+By default, this function strips away `templateBaseDir` and `templateFileExtensions`
+from a filepath, and then returns the result of `templateName()`.
+
+This function should only be overridden if you need complete control over the
+returned template name that can not be achieved via the other options.
+
 #### Config Example
+
+A common configuration might be to combine the `amd` and `templateBaseDir` options
+as follows:
 
 ``` javascript
 emberTemplates: {
   compile: {
     options: {
-      templateName: function(sourceFile) {
-        return sourceFile.replace(/path\/to\//, '');
-      }
+      amd: true,
+      templateBaseDir: /path\/to\//
     },
     files: {
       "path/to/result.js": "path/to/source.handlebars",
@@ -118,6 +166,7 @@ I created this project as an alternative to grunt-ember-handlebars for the follo
 
 ## Release History
 
+* 2013/08/18 - v0.4.11 - Upgraded ember-template-compiler.js to 1.0.0-rc.7. Plus new `amd`, `templateBaseDir`, `templateFileExtensions`, and `templateNameFromFile` options.
 * 2013/06/25 - v0.4.10 - Upgraded Handlebars to 1.0.0.
 * 2013/06/24 - v0.4.9 - Upgraded ember-template-compiler.js to 1.0.0-rc.6
 * 2013/06/09 - v0.4.8 - Upgraded ember-template-compiler.js to 1.0.0-rc.5 - thanks @AdamFerguson!

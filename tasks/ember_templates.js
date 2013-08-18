@@ -17,23 +17,39 @@ module.exports = function(grunt) {
   var handlebarsJs       = fs.readFileSync(libDir + '/handlebars.js', 'utf8');
   var templateCompilerJs = fs.readFileSync(libDir + '/ember-template-compiler.js', 'utf8');
 
-  // filename conversion for templates
-  var defaultTemplateName = function(name) { return name; };
-
   var emberTemplatesTask = function() {
     var options = this.options({});
 
     grunt.verbose.writeflags(options, 'Options');
 
-    var compiled, templateName;
+    var templateFileExtensions = options.templateFileExtensions;
+    if (templateFileExtensions === undefined) {
+      templateFileExtensions = /\.hbs|\.handlebars/;
+    }
 
-    // Assign filename transformation functions
-    var processTemplateName = options.templateName || defaultTemplateName;
+    var templateBaseDir = options.templateBaseDir;
+
+    var templateName = options.templateName;
+    if (templateName === undefined) {
+      templateName = function(name) {
+        return name;
+      };
+    }
+
+    var templateNameFromFile = options.templateNameFromFile;
+    if (templateNameFromFile === undefined) {
+      templateNameFromFile = function(file) {
+        [templateBaseDir, templateFileExtensions].forEach(function(match) {
+          if (match) file = file.replace(match, '');
+        })
+        return templateName(file);
+      }
+    }
 
     // Iterate files
     this.files.forEach(function(f) {
-      var templates = [];
-      var output = [];
+      var templates = [],
+          output = [];
 
       if (options.amd) {
         output = output.concat('define(["Ember"],function(Ember){');
@@ -57,15 +73,14 @@ module.exports = function(grunt) {
 
           // Compile the template
           vm.runInContext('compiledJS = exports.precompile(template);', context);
-          compiled = context.compiledJS;
+
+          templates.push('Ember.TEMPLATES[' + JSON.stringify(templateNameFromFile(file)) + '] = ' +
+                         'Ember.Handlebars.template(' + context.compiledJS + ');');
 
         } catch(e) {
           grunt.log.error(e);
           grunt.fail.warn('Ember Handlebars failed to compile ' + file + '.');
         }
-
-        templateName = processTemplateName(file.replace(/\.hbs|\.handlebars/, ''));
-        templates.push('Ember.TEMPLATES['+JSON.stringify(templateName)+'] = Ember.Handlebars.template('+compiled+');');
       });
 
       output = output.concat(templates);

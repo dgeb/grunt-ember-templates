@@ -45,21 +45,57 @@ module.exports = function(grunt) {
                          'test/fixtures/grandparent/parent/child.hbs']
         }
       },
-      file_pattern_matching: {
+      filePatternMatching: {
         files: {
           'tmp/file_pattern_matching.js': 'test/fixtures/**/*.hbs'
         }
       },
-      truncated_template_names: {
+      customFileExtensions: {
         options: {
-          templateName: function(filename) {
-            return filename.replace(/test\/fixtures\//, '');
+          templateFileExtensions: /\.hbars/
+        },
+        files: {
+          'tmp/custom_file_extensions.js': ['test/fixtures/custom_file_extensions/text.hbars',
+                                            'test/fixtures/custom_file_extensions/simple.hbars']
+        }
+      },
+      truncateBaseDir: {
+        options: {
+          templateBaseDir: /test\/fixtures\//
+        },
+        files: {
+          'tmp/truncate_base_dir.js': ['test/fixtures/text.hbs',
+                                       'test/fixtures/simple.hbs',
+                                       'test/fixtures/grandparent/parent/child.hbs']
+        }
+      },
+      customTemplateName: {
+        options: {
+          templateName: function(name) {
+            // note: this demonstrates an alternative to specifying the
+            // `templateBaseDir` option
+            return name.replace(/test\/fixtures\//, '');
           }
         },
         files: {
-          'tmp/truncated_template_names.js': ['test/fixtures/text.hbs',
-                                              'test/fixtures/simple.hbs',
-                                              'test/fixtures/grandparent/parent/child.hbs']
+          'tmp/custom_template_name.js': ['test/fixtures/text.hbs',
+                                          'test/fixtures/simple.hbs',
+                                          'test/fixtures/grandparent/parent/child.hbs']
+        }
+      },
+      customTemplateNameFromFile: {
+        options: {
+          templateNameFromFile: function(file) {
+            // note: this demonstrates an alternative to specifying the
+            // `templateBaseDir` and `templateFileExtensions` options
+            var name = file.replace(/\.hbs/, '');
+            return name.replace(/test\/fixtures\//, '');
+          }
+        },
+        files: {
+          'tmp/custom_template_name_from_file.js': ['test/fixtures/text.hbs',
+                                                    'test/fixtures/simple.hbs',
+                                                    'test/fixtures/grandparent/parent/child.hbs']
         }
       }
     },

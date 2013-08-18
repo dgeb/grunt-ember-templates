@@ -31,13 +31,43 @@ exports.handlebars = {
 
     test.done();
   },
-  truncated_template_names: function(test) {
+  custom_file_extensions: function(test) {
     'use strict';
     test.expect(1);
 
-    var actual = grunt.file.read('tmp/truncated_template_names.js');
-    var expected = grunt.file.read('test/expected/truncated_template_names.js');
-    test.equal(actual, expected, 'should compile handlebars templates using truncated template names');
+    var actual = grunt.file.read('tmp/custom_file_extensions.js');
+    var expected = grunt.file.read('test/expected/custom_file_extensions.js');
+    test.equal(actual, expected, 'should allow for custom template file extensions');
+
+    test.done();
+  },
+  truncate_base_dir: function(test) {
+    'use strict';
+    test.expect(1);
+
+    var actual = grunt.file.read('tmp/truncate_base_dir.js');
+    var expected = grunt.file.read('test/expected/truncate_base_dir.js');
+    test.equal(actual, expected, 'should truncate base dir from template names');
+
+    test.done();
+  },
+  custom_template_name: function(test) {
+    'use strict';
+    test.expect(1);
+
+    var actual = grunt.file.read('tmp/custom_template_name.js');
+    var expected = grunt.file.read('test/expected/custom_template_name.js');
+    test.equal(actual, expected, 'should allow for custom processing of template names');
+
+    test.done();
+  },
+  custom_template_name_from_file: function(test) {
+    'use strict';
+    test.expect(1);
+
+    var actual = grunt.file.read('tmp/custom_template_name_from_file.js');
+    var expected = grunt.file.read('test/expected/custom_template_name_from_file.js');
+    test.equal(actual, expected, 'should allow for completely custom processing of template file names');
 
     test.done();
   }
