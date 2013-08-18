@@ -57,7 +57,7 @@ implementation of `templateNameFromFile()`.
 
 ``` javascript
 options: {
-  templateBaseDir: /path\/to\/templates\//;
+  templateBaseDir: /path\/to\/templates\//
 }
 ```
 
@@ -74,7 +74,7 @@ you can strip it out like so:
 
 ``` javascript
 options: {
-  templateFileExtensions: /\.hbars/;
+  templateFileExtensions: /\.hbars/
 }
 ```
 
