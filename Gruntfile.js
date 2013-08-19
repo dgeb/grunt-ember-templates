@@ -59,21 +59,21 @@ module.exports = function(grunt) {
                                             'test/fixtures/custom_file_extensions/simple.hbars']
         }
       },
-      truncateBaseDir: {
+      truncateBasePath: {
         options: {
-          templateBaseDir: /test\/fixtures\//
+          templateBasePath: /test\/fixtures\//
         },
         files: {
-          'tmp/truncate_base_dir.js': ['test/fixtures/text.hbs',
-                                       'test/fixtures/simple.hbs',
-                                       'test/fixtures/grandparent/parent/child.hbs']
+          'tmp/truncate_base_path.js': ['test/fixtures/text.hbs',
+                                        'test/fixtures/simple.hbs',
+                                        'test/fixtures/grandparent/parent/child.hbs']
         }
       },
       customTemplateName: {
         options: {
           templateName: function(name) {
             // note: this demonstrates an alternative to specifying the
-            // `templateBaseDir` option
+            //       `templateBasePath` option
             return name.replace(/test\/fixtures\//, '');
           }
         },
@@ -87,7 +87,7 @@ module.exports = function(grunt) {
         options: {
           templateNameFromFile: function(file) {
             // note: this demonstrates an alternative to specifying the
-            // `templateBaseDir` and `templateFileExtensions` options
+            //       `templateBasePath` and `templateFileExtensions` options
             var name = file.replace(/\.hbs/, '');
             return name.replace(/test\/fixtures\//, '');
           }

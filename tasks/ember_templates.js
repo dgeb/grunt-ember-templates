@@ -24,10 +24,11 @@ module.exports = function(grunt) {
 
     var templateFileExtensions = options.templateFileExtensions;
     if (templateFileExtensions === undefined) {
-      templateFileExtensions = /\.hbs|\.handlebars/;
+      templateFileExtensions = /\.(hbs|hjs|handlebars)/;
     }
 
-    var templateBaseDir = options.templateBaseDir;
+    // `templateBaseDir` is an alias for `templateBasePath`
+    var templateBasePath = options.templateBasePath || options.templateBaseDir;
 
     var templateName = options.templateName;
     if (templateName === undefined) {
@@ -39,7 +40,7 @@ module.exports = function(grunt) {
     var templateNameFromFile = options.templateNameFromFile;
     if (templateNameFromFile === undefined) {
       templateNameFromFile = function(file) {
-        [templateBaseDir, templateFileExtensions].forEach(function(match) {
+        [templateBasePath, templateFileExtensions].forEach(function(match) {
           if (match) file = file.replace(match, '');
         })
         return templateName(file);

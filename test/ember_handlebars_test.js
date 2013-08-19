@@ -41,13 +41,13 @@ exports.handlebars = {
 
     test.done();
   },
-  truncate_base_dir: function(test) {
+  truncate_base_path: function(test) {
     'use strict';
     test.expect(1);
 
-    var actual = grunt.file.read('tmp/truncate_base_dir.js');
-    var expected = grunt.file.read('test/expected/truncate_base_dir.js');
-    test.equal(actual, expected, 'should truncate base dir from template names');
+    var actual = grunt.file.read('tmp/truncate_base_path.js');
+    var expected = grunt.file.read('test/expected/truncate_base_path.js');
+    test.equal(actual, expected, 'should truncate base path from template names');
 
     test.done();
   },

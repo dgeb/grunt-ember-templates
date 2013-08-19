@@ -22,7 +22,9 @@ grunt.loadNpmTasks('grunt-ember-templates');
 
 Inside your `Gruntfile.js` file, add a section named `emberTemplates`. This section specifies the files to compile and the options used with [handlebars](http://handlebarsjs.com/).
 
-##### files ```object```
+##### files
+
+Type: `object`
 
 This defines what files this task will process and should contain key:value pairs.
 
@@ -30,13 +32,18 @@ The key (destination) should be an unique filepath (supports [grunt.template](ht
 
 Note: Values are precompiled to the `Ember.TEMPLATES` array in the order passed.
 
-##### options ```object```
+##### options
 
-This controls how this task operates and should contain key:value pairs, see options below.
+Type: `object`
+
+This controls how this task operates and should contain key:value pairs. See specific options below.
 
 #### Options
 
-##### amd ```boolean```
+##### amd
+
+Type: `boolean`
+Default: `false`
 
 Include this option to ensure that the compiled output will be wrapped as an
 AMD module.
@@ -47,7 +54,9 @@ options: {
 }
 ```
 
-##### templateBaseDir ```regex | string```
+##### templateBasePath
+
+Type: `regex | string`
 
 A regex or string to match the base path to your template directory. By default,
 this option is not defined.
@@ -57,17 +66,18 @@ implementation of `templateNameFromFile()`.
 
 ``` javascript
 options: {
-  templateBaseDir: /path\/to\/templates\//
+  templateBasePath: /path\/to\/templates\//
 }
 ```
 
-##### templateFileExtensions ```regex | string```
+##### templateFileExtensions
 
-A regex or string to match the file extensions for your templates. By default,
-this option is `/\.hbs|\.handlebars/`.
+Type: `regex | string`
+Default: /\.(hbs|hjs|handlebars)/
 
-Extensions will be stripped out of template names by the default implementation
-of `templateNameFromFile()`.
+A regex or string to match the file extensions for your templates. Extensions
+will be stripped out of template names by the default implementation of
+`templateNameFromFile()`.
 
 For example, if you're using a non-standard extension for your template files,
 you can strip it out like so:
@@ -78,7 +88,10 @@ options: {
 }
 ```
 
-##### templateName ```function```
+##### templateName
+
+Type: `function`
+Arguments: `fileName`
 
 This option accepts a function which takes one argument (the source template
 filepath, which has already been stripped of its file extensions and base directory)
@@ -96,13 +109,16 @@ options: {
 }
 ```
 
-##### templateNameFromFile ```function```
+##### templateNameFromFile
+
+Type: `function`
+Arguments: `filePath`
 
 This option accepts a function which takes one argument (the full source template
 filepath) and returns a string which will be used as the key for the precompiled
 template object.
 
-By default, this function strips away `templateBaseDir` and `templateFileExtensions`
+By default, this function strips away `templateBasePath` and `templateFileExtensions`
 from a filepath, and then returns the result of `templateName()`.
 
 This function should only be overridden if you need complete control over the
@@ -110,7 +126,7 @@ returned template name that can not be achieved via the other options.
 
 #### Config Example
 
-A common configuration might be to combine the `amd` and `templateBaseDir` options
+A common configuration might be to combine the `amd` and `templateBasePath` options
 as follows:
 
 ``` javascript
@@ -118,7 +134,7 @@ emberTemplates: {
   compile: {
     options: {
       amd: true,
-      templateBaseDir: /path\/to\//
+      templateBasePath: /path\/to\//
     },
     files: {
       "path/to/result.js": "path/to/source.handlebars",
@@ -166,6 +182,7 @@ I created this project as an alternative to grunt-ember-handlebars for the follo
 
 ## Release History
 
+* 2013/08/19 - v0.4.12 - Added `templateBasePath` alias to `templateBaseDir`. Default `templateFileExtensions` now also include `.hjs`.
 * 2013/08/18 - v0.4.11 - Upgraded ember-template-compiler.js to 1.0.0-rc.7. Plus new `amd`, `templateBaseDir`, `templateFileExtensions`, and `templateNameFromFile` options.
 * 2013/06/25 - v0.4.10 - Upgraded Handlebars to 1.0.0.
 * 2013/06/24 - v0.4.9 - Upgraded ember-template-compiler.js to 1.0.0-rc.6
