@@ -58,11 +58,9 @@ options: {
 
 Type: `regex | string`
 
-A regex or string to match the base path to your template directory. By default,
-this option is not defined.
-
-If defined, this path will be stripped out of template names by the default
-implementation of `templateNameFromFile()`.
+A regex or string to match the base path to your template directory. If defined,
+this path will be stripped out of template names by the default implementation
+of `templateNameFromFile()`.
 
 ``` javascript
 options: {
