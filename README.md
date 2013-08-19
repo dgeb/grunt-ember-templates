@@ -73,7 +73,7 @@ options: {
 ##### templateFileExtensions
 
 Type: `regex | string`
-Default: /\.(hbs|hjs|handlebars)/
+Default: `/\.(hbs|hjs|handlebars)/`
 
 A regex or string to match the file extensions for your templates. Extensions
 will be stripped out of template names by the default implementation of
