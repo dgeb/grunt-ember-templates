@@ -70,5 +70,15 @@ exports.handlebars = {
     test.equal(actual, expected, 'should allow for completely custom processing of template file names');
 
     test.done();
+  },
+  development_mode: function(test) {
+    'use strict';
+    test.expect(1);
+
+    var actual = grunt.file.read('tmp/development_mode.js');
+    var expected = grunt.file.read('test/expected/development_mode.js');
+    test.equal(actual, expected, 'should wrap templates with `Ember.Handlebars.compile` in development mode');
+
+    test.done();
   }
 };

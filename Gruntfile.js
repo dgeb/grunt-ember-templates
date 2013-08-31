@@ -97,6 +97,14 @@ module.exports = function(grunt) {
                                                     'test/fixtures/simple.hbs',
                                                     'test/fixtures/grandparent/parent/child.hbs']
         }
+      },
+      developmentMode: {
+        options: {
+          developmentMode: true
+        },
+        files: {
+          'tmp/development_mode.js': 'test/fixtures/**/*.hbs'
+        }
       }
     },
 
