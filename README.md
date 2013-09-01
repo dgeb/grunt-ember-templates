@@ -54,6 +54,15 @@ options: {
 }
 ```
 
+##### precompile
+
+Type: `boolean`
+Default: `true`
+
+Disable this option to skip template precompilation with handlebars.js and instead
+wrap the template content with `Ember.Handlebars.compile`. This will reduce template
+compilation time during development. **Don't disable this option for production build**.
+
 ##### templateBasePath
 
 Type: `regex | string`
@@ -121,15 +130,6 @@ from a filepath, and then returns the result of `templateName()`.
 
 This function should only be overridden if you need complete control over the
 returned template name that can not be achieved via the other options.
-
-##### precompile
-
-Type: `boolean`
-Default: `true`
-
-Disable this option to skip template precompilation with handlebars.js and instead
-wrap the template content with `Ember.Handlebars.compile`. This will reduce template
-compilation time during development. **Don't disable this option for production build**.
 
 #### Config Example
 
