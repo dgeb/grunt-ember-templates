@@ -98,12 +98,12 @@ module.exports = function(grunt) {
                                                     'test/fixtures/grandparent/parent/child.hbs']
         }
       },
-      developmentMode: {
+      precompile: {
         options: {
-          developmentMode: true
+          precompile: false
         },
         files: {
-          'tmp/development_mode.js': 'test/fixtures/**/*.hbs'
+          'tmp/precompile.js': 'test/fixtures/**/*.hbs'
         }
       }
     },

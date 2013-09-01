@@ -19,7 +19,7 @@ module.exports = function(grunt) {
 
   var emberTemplatesTask = function() {
     var options = this.options({
-      developmentMode: false
+      precompile: true
     });
 
     grunt.verbose.writeflags(options, 'Options');
@@ -63,10 +63,8 @@ module.exports = function(grunt) {
       f.src.forEach(function(file) {
         try {
           
-          if(options.developmentMode) {
-            templates.push('Ember.TEMPLATES[' + JSON.stringify(templateNameFromFile(file)) + '] = ' +
-                           'Ember.Handlebars.compile(' + JSON.stringify(grunt.file.read(file)) + ');');
-          } else {
+          if(options.precompile) {
+            
             // Create a context into which we will load both the ember template compiler
             // as well as the template to be compiled. The ember template compiler expects
             // `exports` to be defined, and uses it to export `precompile()`.
@@ -86,7 +84,11 @@ module.exports = function(grunt) {
   
             templates.push('Ember.TEMPLATES[' + JSON.stringify(templateNameFromFile(file)) + '] = ' +
                            'Ember.Handlebars.template(' + context.compiledJS + ');');
-              
+            
+          } else {
+            
+            templates.push('Ember.TEMPLATES[' + JSON.stringify(templateNameFromFile(file)) + '] = ' +
+                           'Ember.Handlebars.compile(' + JSON.stringify(grunt.file.read(file)) + ');');
           }
         } catch(e) {
           grunt.log.error(e);

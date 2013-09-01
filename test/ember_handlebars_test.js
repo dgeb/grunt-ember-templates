@@ -71,13 +71,13 @@ exports.handlebars = {
 
     test.done();
   },
-  development_mode: function(test) {
+  precompile: function(test) {
     'use strict';
     test.expect(1);
 
-    var actual = grunt.file.read('tmp/development_mode.js');
-    var expected = grunt.file.read('test/expected/development_mode.js');
-    test.equal(actual, expected, 'should wrap templates with `Ember.Handlebars.compile` in development mode');
+    var actual = grunt.file.read('tmp/precompile.js');
+    var expected = grunt.file.read('test/expected/precompile.js');
+    test.equal(actual, expected, 'should wrap templates with `Ember.Handlebars.compile` when precompile is disabled');
 
     test.done();
   }

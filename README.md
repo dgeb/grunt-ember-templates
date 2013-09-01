@@ -122,14 +122,14 @@ from a filepath, and then returns the result of `templateName()`.
 This function should only be overridden if you need complete control over the
 returned template name that can not be achieved via the other options.
 
-##### developmentMode
+##### precompile
 
 Type: `boolean`
-Default: `false`
+Default: `true`
 
-Enable this option to skip the template precompilation with handlebars.js and simply 
+Disbale this option to skip the template precompilation with handlebars.js and simply 
 wrap the template content with `Ember.Handlebars.compile`. This will reduce the template 
-compilation time during your development. **Don't enable this option for production build**.
+compilation time during your development. **Don't disable this option for production build**.
 
 #### Config Example
 
