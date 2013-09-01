@@ -127,9 +127,9 @@ returned template name that can not be achieved via the other options.
 Type: `boolean`
 Default: `true`
 
-Disbale this option to skip the template precompilation with handlebars.js and simply 
-wrap the template content with `Ember.Handlebars.compile`. This will reduce the template 
-compilation time during your development. **Don't disable this option for production build**.
+Disable this option to skip template precompilation with handlebars.js and instead
+wrap the template content with `Ember.Handlebars.compile`. This will reduce template
+compilation time during development. **Don't disable this option for production build**.
 
 #### Config Example
 

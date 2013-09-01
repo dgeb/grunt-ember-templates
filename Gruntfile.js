@@ -98,12 +98,14 @@ module.exports = function(grunt) {
                                                     'test/fixtures/grandparent/parent/child.hbs']
         }
       },
-      precompile: {
+      skipPrecompile: {
         options: {
           precompile: false
         },
         files: {
-          'tmp/precompile.js': 'test/fixtures/**/*.hbs'
+          'tmp/skip_precompile.js': ['test/fixtures/text.hbs',
+                                     'test/fixtures/simple.hbs',
+                                     'test/fixtures/grandparent/parent/child.hbs']
         }
       }
     },

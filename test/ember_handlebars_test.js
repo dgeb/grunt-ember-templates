@@ -71,12 +71,12 @@ exports.handlebars = {
 
     test.done();
   },
-  precompile: function(test) {
+  skip_precompile: function(test) {
     'use strict';
     test.expect(1);
 
-    var actual = grunt.file.read('tmp/precompile.js');
-    var expected = grunt.file.read('test/expected/precompile.js');
+    var actual = grunt.file.read('tmp/skip_precompile.js');
+    var expected = grunt.file.read('test/expected/skip_precompile.js');
     test.equal(actual, expected, 'should wrap templates with `Ember.Handlebars.compile` when precompile is disabled');
 
     test.done();

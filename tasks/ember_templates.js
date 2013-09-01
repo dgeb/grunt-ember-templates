@@ -62,8 +62,8 @@ module.exports = function(grunt) {
 
       f.src.forEach(function(file) {
         try {
-          
-          if(options.precompile) {
+
+          if (options.precompile) {
             
             // Create a context into which we will load both the ember template compiler
             // as well as the template to be compiled. The ember template compiler expects
@@ -84,9 +84,9 @@ module.exports = function(grunt) {
   
             templates.push('Ember.TEMPLATES[' + JSON.stringify(templateNameFromFile(file)) + '] = ' +
                            'Ember.Handlebars.template(' + context.compiledJS + ');');
-            
+
           } else {
-            
+
             templates.push('Ember.TEMPLATES[' + JSON.stringify(templateNameFromFile(file)) + '] = ' +
                            'Ember.Handlebars.compile(' + JSON.stringify(grunt.file.read(file)) + ');');
           }
