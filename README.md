@@ -189,6 +189,7 @@ I created this project as an alternative to grunt-ember-handlebars for the follo
 
 ## Release History
 
+* 2013/09/01 - v0.4.13 - Upgraded ember-template-compiler.js to 1.0.0 (woot!). Added `precompile` option - thanks @manoharank!
 * 2013/08/19 - v0.4.12 - Added `templateBasePath` alias to `templateBaseDir`. Default `templateFileExtensions` now also include `.hjs`.
 * 2013/08/18 - v0.4.11 - Upgraded ember-template-compiler.js to 1.0.0-rc.7. Plus new `amd`, `templateBaseDir`, `templateFileExtensions`, and `templateNameFromFile` options.
 * 2013/06/25 - v0.4.10 - Upgraded Handlebars to 1.0.0.
