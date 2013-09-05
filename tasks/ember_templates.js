@@ -99,7 +99,7 @@ module.exports = function(grunt) {
       output = output.concat(templates);
 
       if (options.amd) {
-        output = output.concat('});\n');
+        output = output.concat('});');
       }
 
       if (output.length > 0) {
