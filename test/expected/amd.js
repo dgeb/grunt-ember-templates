@@ -1,4 +1,4 @@
-define(["Ember"],function(Ember){
+define(["ember"], function(Ember){
 
 Ember.TEMPLATES["test/fixtures/text"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
