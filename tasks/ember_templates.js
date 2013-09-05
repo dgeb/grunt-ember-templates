@@ -57,7 +57,7 @@ module.exports = function(grunt) {
           output = [];
 
       if (options.amd) {
-        output = output.concat('define(["Ember"],function(Ember){');
+        output = output.concat('define(["ember"], function(Ember){');
       }
 
       f.src.forEach(function(file) {
@@ -99,7 +99,7 @@ module.exports = function(grunt) {
       output = output.concat(templates);
 
       if (options.amd) {
-        output = output.concat('});');
+        output = output.concat('});\n');
       }
 
       if (output.length > 0) {
