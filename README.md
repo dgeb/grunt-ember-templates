@@ -131,6 +131,25 @@ from a filepath, and then returns the result of `templateName()`.
 This function should only be overridden if you need complete control over the
 returned template name that can not be achieved via the other options.
 
+##### generateRegistrationJs
+
+Type: `function`
+Arguments: `processedTemplates`
+
+This option accepts a function which takes one argument that is an array of
+`processedTemplates` and returns a string of JS code to be added to the generated
+file. Each `processedTemplate` has a `name` property and a `js` property. For example:
+
+``` javascript
+{ name: 'templates/foo/bar', js: 'Ember.Handlebars.template(function anonymous(Handlebars, ...)' }
+```
+
+By default, this function assigns each item to Ember.TEMPLATES with the name as the
+key and the js as the value.
+
+This function should be overridden if you need to register templates in an
+alternative fashion.
+
 #### Config Example
 
 A common configuration might be to combine the `amd` and `templateBasePath` options
