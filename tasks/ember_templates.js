@@ -17,43 +17,36 @@ module.exports = function(grunt) {
   var handlebarsJs       = fs.readFileSync(libDir + '/handlebars.js', 'utf8');
   var templateCompilerJs = fs.readFileSync(libDir + '/ember-template-compiler.js', 'utf8');
 
+  var defaultRegistrationJs = function(processedTemplateList) {
+    return processedTemplateList.map(function(processedTemplate){
+      return 'Ember.TEMPLATES[' + JSON.stringify(processedTemplate.name) + '] = ' + processedTemplate.js + ';';
+    }).join("\n\n");
+  };
+
   var emberTemplatesTask = function() {
     var options = this.options({
-      precompile: true
+      templateFileExtensions: /\.(hbs|hjs|handlebars)/,
+      amd: false,
+      precompile: true,
+      templateName: function(name) { return name; },
+      templateNameFromFile: function(file) {
+        // `templateBaseDir` is an alias for `templateBasePath`
+        var templateBasePath = options.templateBasePath || options.templateBaseDir;
+        [templateBasePath, options.templateFileExtensions].forEach(function(match) {
+          if (match) {
+            file = file.replace(match, '');
+          }
+        });
+        return options.templateName(file);
+      },
+      generateRegistrationJs: defaultRegistrationJs,
     });
 
     grunt.verbose.writeflags(options, 'Options');
 
-    var templateFileExtensions = options.templateFileExtensions;
-    if (templateFileExtensions === undefined) {
-      templateFileExtensions = /\.(hbs|hjs|handlebars)/;
-    }
-
-    // `templateBaseDir` is an alias for `templateBasePath`
-    var templateBasePath = options.templateBasePath || options.templateBaseDir;
-
-    var templateName = options.templateName;
-    if (templateName === undefined) {
-      templateName = function(name) {
-        return name;
-      };
-    }
-
-    var templateNameFromFile = options.templateNameFromFile;
-    if (templateNameFromFile === undefined) {
-      templateNameFromFile = function(file) {
-        [templateBasePath, templateFileExtensions].forEach(function(match) {
-          if(match) {
-            file = file.replace(match, '');
-          } 
-        });
-        return templateName(file);
-      };
-    }
-
     // Iterate files
     this.files.forEach(function(f) {
-      var templates = [],
+      var processedTemplates = [],
           output = [];
 
       if (options.amd) {
@@ -64,7 +57,7 @@ module.exports = function(grunt) {
         try {
 
           if (options.precompile) {
-            
+
             // Create a context into which we will load both the ember template compiler
             // as well as the template to be compiled. The ember template compiler expects
             // `exports` to be defined, and uses it to export `precompile()`.
@@ -72,23 +65,26 @@ module.exports = function(grunt) {
               exports: {},
               template: grunt.file.read(file)
             });
-  
+
             // Load handlebars
             vm.runInContext(handlebarsJs, context, 'handlebars.js');
-  
+
             // Load the ember template compiler
             vm.runInContext(templateCompilerJs, context, 'ember-template-compiler.js');
-  
+
             // Compile the template
             vm.runInContext('compiledJS = exports.precompile(template);', context);
-  
-            templates.push('Ember.TEMPLATES[' + JSON.stringify(templateNameFromFile(file)) + '] = ' +
-                           'Ember.Handlebars.template(' + context.compiledJS + ');');
+
+            processedTemplates.push({
+              name: options.templateNameFromFile(file),
+              js: 'Ember.Handlebars.template(' + context.compiledJS + ')'
+            });
 
           } else {
-
-            templates.push('Ember.TEMPLATES[' + JSON.stringify(templateNameFromFile(file)) + '] = ' +
-                           'Ember.Handlebars.compile(' + JSON.stringify(grunt.file.read(file)) + ');');
+            processedTemplates.push({
+              name: options.templateNameFromFile(file),
+              js: 'Ember.Handlebars.compile(' + JSON.stringify(grunt.file.read(file)) + ')'
+            });
           }
         } catch(e) {
           grunt.log.error(e);
@@ -96,7 +92,9 @@ module.exports = function(grunt) {
         }
       });
 
-      output = output.concat(templates);
+      var registrationJs = options.generateRegistrationJs(processedTemplates);
+    
+      output = output.concat(registrationJs);
 
       if (options.amd) {
         output = output.concat('});');

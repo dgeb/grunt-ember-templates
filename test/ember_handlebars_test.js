@@ -80,5 +80,15 @@ exports.handlebars = {
     test.equal(actual, expected, 'should wrap templates with `Ember.Handlebars.compile` when precompile is disabled');
 
     test.done();
+  },
+  custom_registration: function(test) {
+    'use strict';
+    test.expect(1);
+
+    var actual = grunt.file.read('tmp/custom_registration.js');
+    var expected = grunt.file.read('test/expected/custom_registration.js');
+    test.equal(actual, expected, 'should allow for custom generation of registration code');
+
+    test.done();
   }
 };

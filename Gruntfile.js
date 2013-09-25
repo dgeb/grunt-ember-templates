@@ -107,6 +107,19 @@ module.exports = function(grunt) {
                                      'test/fixtures/simple.hbs',
                                      'test/fixtures/grandparent/parent/child.hbs']
         }
+      },
+      customRegistration: {
+        options: {
+          generateRegistrationJs: function(processedTemplates) {
+            return processedTemplates.map(function(processedTemplate){
+              return "define('templates/" + processedTemplate.name + "', [], function(){ return " + processedTemplate.js + "; });";
+            }).join("\n");
+          }
+        },
+        files: {
+          'tmp/custom_registration.js': ['test/fixtures/text.hbs',
+                                         'test/fixtures/simple.hbs']
+        }
       }
     },
 
