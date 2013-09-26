@@ -216,6 +216,7 @@ I created this project as an alternative to grunt-ember-handlebars for the follo
 
 ## Release History
 
+* 2013/09/25 - v0.4.15 - Added `templateRegistration` option. Thanks @lukemelia!
 * 2013/09/05 - v0.4.14 - Now using lowercase module name `ember` with `amd` option. Thanks @rpflorence!
 * 2013/09/01 - v0.4.13 - Upgraded ember-template-compiler.js to 1.0.0 (woot!). Added `precompile` option - thanks @manoharank!
 * 2013/08/19 - v0.4.12 - Added `templateBasePath` alias to `templateBaseDir`. Default `templateFileExtensions` now also include `.hjs`.
