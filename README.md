@@ -144,8 +144,19 @@ and its `contents` (which may be compiled or not - see `precompile`). This
 function should return a string of JS code to be added to the generated file.
 
 By default, this function assigns templates to `Ember.TEMPLATES` with their
-`name` as the key and `contents` as the value. This function should be
-overridden if you need to register templates in an alternative fashion.
+`name` as the key and `contents` as the value.
+
+This function should be overridden if you need to register templates in an
+alternative fashion. For example, it could be used to define custom modules for
+each of your templates:
+
+``` javascript
+options: {
+  templateRegistration: function(name, contents) {
+    return "define('templates/" + name + "', ['ember'], function(Ember) { return " + content + "; });";
+  }
+}
+```
 
 #### Config Example
 

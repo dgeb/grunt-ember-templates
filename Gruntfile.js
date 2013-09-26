@@ -111,7 +111,7 @@ module.exports = function(grunt) {
       customRegistration: {
         options: {
           templateRegistration: function(name, content) {
-            return "define('templates/" + name + "', [], function(){ return " + content + "; });";
+            return "define('templates/" + name + "', ['ember'], function(Ember) { return " + content + "; });";
           }
         },
         files: {
