@@ -153,7 +153,7 @@ each of your templates:
 ``` javascript
 options: {
   templateRegistration: function(name, contents) {
-    return "define('templates/" + name + "', ['ember'], function(Ember) { return " + content + "; });";
+    return "define('templates/" + name + "', ['ember'], function(Ember) { return " + contents + "; });";
   }
 }
 ```
