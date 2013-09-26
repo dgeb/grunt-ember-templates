@@ -45,8 +45,10 @@ This controls how this task operates and should contain key:value pairs. See spe
 Type: `boolean`
 Default: `false`
 
-Include this option to ensure that the compiled output will be wrapped as an
-AMD module.
+Include this option to ensure that the compiled output will be defined as a
+single AMD module with a single dependency (`ember`). If you'd like to output
+individual templates as modules, skip this option and use the
+`templateRegistration` option described below.
 
 ``` javascript
 options: {
@@ -131,24 +133,19 @@ from a filepath, and then returns the result of `templateName()`.
 This function should only be overridden if you need complete control over the
 returned template name that can not be achieved via the other options.
 
-##### generateRegistrationJs
+##### templateRegistration
 
 Type: `function`
-Arguments: `processedTemplates`
+Arguments: `name`, `contents`
 
-This option accepts a function which takes one argument that is an array of
-`processedTemplates` and returns a string of JS code to be added to the generated
-file. Each `processedTemplate` has a `name` property and a `js` property. For example:
+This option allows for custom registration of templates. It accepts a function
+which takes as arguments the `name` of a template (see`templateNameFromFile`)
+and its `contents` (which may be compiled or not - see `precompile`). This
+function should return a string of JS code to be added to the generated file.
 
-``` javascript
-{ name: 'templates/foo/bar', js: 'Ember.Handlebars.template(function anonymous(Handlebars, ...)' }
-```
-
-By default, this function assigns each item to Ember.TEMPLATES with the name as the
-key and the js as the value.
-
-This function should be overridden if you need to register templates in an
-alternative fashion.
+By default, this function assigns templates to `Ember.TEMPLATES` with their
+`name` as the key and `contents` as the value. This function should be
+overridden if you need to register templates in an alternative fashion.
 
 #### Config Example
 

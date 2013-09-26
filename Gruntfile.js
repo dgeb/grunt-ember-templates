@@ -110,10 +110,8 @@ module.exports = function(grunt) {
       },
       customRegistration: {
         options: {
-          generateRegistrationJs: function(processedTemplates) {
-            return processedTemplates.map(function(processedTemplate){
-              return "define('templates/" + processedTemplate.name + "', [], function(){ return " + processedTemplate.js + "; });";
-            }).join("\n");
+          templateRegistration: function(name, content) {
+            return "define('templates/" + name + "', [], function(){ return " + content + "; });";
           }
         },
         files: {

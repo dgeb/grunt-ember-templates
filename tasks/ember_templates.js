@@ -17,12 +17,6 @@ module.exports = function(grunt) {
   var handlebarsJs       = fs.readFileSync(libDir + '/handlebars.js', 'utf8');
   var templateCompilerJs = fs.readFileSync(libDir + '/ember-template-compiler.js', 'utf8');
 
-  var defaultRegistrationJs = function(processedTemplateList) {
-    return processedTemplateList.map(function(processedTemplate){
-      return 'Ember.TEMPLATES[' + JSON.stringify(processedTemplate.name) + '] = ' + processedTemplate.js + ';';
-    }).join("\n\n");
-  };
-
   var emberTemplatesTask = function() {
     var options = this.options({
       templateFileExtensions: /\.(hbs|hjs|handlebars)/,
@@ -39,7 +33,9 @@ module.exports = function(grunt) {
         });
         return options.templateName(file);
       },
-      generateRegistrationJs: defaultRegistrationJs,
+      templateRegistration: function(name, contents) {
+        return 'Ember.TEMPLATES[' + JSON.stringify(name) + '] = ' + contents + ';'
+      }
     });
 
     grunt.verbose.writeflags(options, 'Options');
@@ -47,7 +43,9 @@ module.exports = function(grunt) {
     // Iterate files
     this.files.forEach(function(f) {
       var processedTemplates = [],
-          output = [];
+          output = [],
+          name,
+          contents;
 
       if (options.amd) {
         output = output.concat('define(["ember"], function(Ember){');
@@ -55,6 +53,8 @@ module.exports = function(grunt) {
 
       f.src.forEach(function(file) {
         try {
+
+          name = options.templateNameFromFile(file);
 
           if (options.precompile) {
 
@@ -75,26 +75,23 @@ module.exports = function(grunt) {
             // Compile the template
             vm.runInContext('compiledJS = exports.precompile(template);', context);
 
-            processedTemplates.push({
-              name: options.templateNameFromFile(file),
-              js: 'Ember.Handlebars.template(' + context.compiledJS + ')'
-            });
+            // Wrap compiled template
+            contents = 'Ember.Handlebars.template(' + context.compiledJS + ')';
 
           } else {
-            processedTemplates.push({
-              name: options.templateNameFromFile(file),
-              js: 'Ember.Handlebars.compile(' + JSON.stringify(grunt.file.read(file)) + ')'
-            });
+            // Wrap raw (uncompiled) template
+            contents = 'Ember.Handlebars.compile(' + JSON.stringify(grunt.file.read(file)) + ')';
           }
+
+          processedTemplates.push(options.templateRegistration(name, contents));
+
         } catch(e) {
           grunt.log.error(e);
           grunt.fail.warn('Ember Handlebars failed to compile ' + file + '.');
         }
       });
 
-      var registrationJs = options.generateRegistrationJs(processedTemplates);
-    
-      output = output.concat(registrationJs);
+      output = output.concat(processedTemplates);
 
       if (options.amd) {
         output = output.concat('});');
