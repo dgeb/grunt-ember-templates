@@ -1,0 +1,8 @@
+<div>
+    <div>Spaces</div>
+	<div>Tabs</div>
+
+
+	<div   class="spaces  in   attrs"></div>
+	{{    spaces in handlebars tags   }}
+</div>
