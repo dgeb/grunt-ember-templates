@@ -65,6 +65,24 @@ Disable this option to skip template precompilation with handlebars.js and inste
 wrap the template content with `Ember.Handlebars.compile`. This will reduce template
 compilation time during development. **Don't disable this option for production build**.
 
+##### preprocess
+
+Type: `function`
+Arguments: `source`
+
+This option accepts a function which can be used to preprocess the raw contents
+of the source read from the template file.
+
+You may want to use this function to strip comments or minify whitespace:
+
+``` javascript
+options: {
+  preprocess: function(source) {
+    return source.replace(/\s+/g, ' ');
+  }
+}
+```
+
 ##### templateBasePath
 
 Type: `regex | string`
@@ -216,6 +234,7 @@ I created this project as an alternative to grunt-ember-handlebars for the follo
 
 ## Release History
 
+* 2013/11/04 - v0.4.16 - Added `preprocess` option. Thanks @timrwood!
 * 2013/09/25 - v0.4.15 - Added `templateRegistration` option. Thanks @lukemelia!
 * 2013/09/05 - v0.4.14 - Now using lowercase module name `ember` with `amd` option. Thanks @rpflorence!
 * 2013/09/01 - v0.4.13 - Upgraded ember-template-compiler.js to 1.0.0 (woot!). Added `precompile` option - thanks @manoharank!

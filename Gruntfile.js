@@ -100,7 +100,7 @@ module.exports = function(grunt) {
       },
       minify: {
         options: {
-          preprocess: function (source) {
+          preprocess: function(source) {
             return source.replace(/\s+/g, ' ');
           }
         },
