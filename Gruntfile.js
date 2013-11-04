@@ -47,7 +47,7 @@ module.exports = function(grunt) {
       },
       filePatternMatching: {
         files: {
-          'tmp/file_pattern_matching.js': 'test/fixtures/**/*.hbs'
+          'tmp/file_pattern_matching.js': 'test/fixtures/{simple,text}.hbs'
         }
       },
       customFileExtensions: {
@@ -105,7 +105,7 @@ module.exports = function(grunt) {
           }
         },
         files: {
-          'tmp/preprocess.js': ['test/fixtures/custom_file_extensions/preprocess.minhbs']
+          'tmp/preprocess.js': ['test/fixtures/preprocess.hbs']
         }
       },
       skipPrecompile: {
