@@ -98,6 +98,16 @@ module.exports = function(grunt) {
                                                     'test/fixtures/grandparent/parent/child.hbs']
         }
       },
+      minify: {
+        options: {
+          preprocess: function (source) {
+            return source.replace(/\s+/g, ' ');
+          }
+        },
+        files: {
+          'tmp/preprocess.js': ['test/fixtures/custom_file_extensions/preprocess.minhbs']
+        }
+      },
       skipPrecompile: {
         options: {
           precompile: false

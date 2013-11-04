@@ -71,6 +71,16 @@ exports.handlebars = {
 
     test.done();
   },
+  minify: function(test) {
+    'use strict';
+    test.expect(1);
+
+    var actual = grunt.file.read('tmp/preprocess.js');
+    var expected = grunt.file.read('test/expected/preprocess.js');
+    test.equal(actual, expected, 'should be able to run a preprocess function');
+
+    test.done();
+  },
   skip_precompile: function(test) {
     'use strict';
     test.expect(1);

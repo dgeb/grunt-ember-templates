@@ -58,12 +58,19 @@ module.exports = function(grunt) {
 
           if (options.precompile) {
 
+            var template = grunt.file.read(file);
+
+            // Run the `preprocess` function if specified in the options.
+            if (typeof options.preprocess === 'function') {
+              template = options.preprocess(template);
+            }
+
             // Create a context into which we will load both the ember template compiler
             // as well as the template to be compiled. The ember template compiler expects
             // `exports` to be defined, and uses it to export `precompile()`.
             var context = vm.createContext({
               exports: {},
-              template: grunt.file.read(file)
+              template: template
             });
 
             // Load handlebars
