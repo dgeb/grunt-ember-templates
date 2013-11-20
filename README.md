@@ -176,6 +176,38 @@ options: {
 }
 ```
 
+##### templateCompilerPath
+
+Type: `string`
+Default: Uses the bundled `ember-template-compiler.js`.
+
+This option allows for using a custom template compiler. This is useful when you
+need to use a different compiler version that the one bundled with this project.
+
+For example, if there are upstream changes in Ember to the compiler you could use
+the following configuration to override the bundled compiler with your own:
+
+```javascript
+options: {
+  templateCompilerPath: 'vendor/ember/ember-template-compiler.js'
+}
+```
+
+##### handlebarsPath
+
+Type: `string`
+Default: Uses the bundled `handlebars.js`.
+
+This option allows for using a different version of Handlebars than is bundled
+with this project. This is usefull when there is an update to Handlebars, but no
+new version of this project.
+
+```javascript
+options: {
+  handlebarsPath: 'vendor/handlebars/handlebars.js'
+}
+```
+
 #### Config Example
 
 A common configuration might be to combine the `amd` and `templateBasePath` options
