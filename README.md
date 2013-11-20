@@ -182,7 +182,7 @@ Type: `string`
 Default: Uses the bundled `ember-template-compiler.js`.
 
 This option allows for using a custom template compiler. This is useful when you
-need to use a different compiler version that the one bundled with this project.
+need to use a different compiler version than the one bundled with this project.
 
 For example, if there are upstream changes in Ember to the compiler you could use
 the following configuration to override the bundled compiler with your own:
@@ -199,7 +199,7 @@ Type: `string`
 Default: Uses the bundled `handlebars.js`.
 
 This option allows for using a different version of Handlebars than is bundled
-with this project. This is usefull when there is an update to Handlebars, but no
+with this project. This is useful when there is an update to Handlebars, but no
 new version of this project.
 
 ```javascript
@@ -266,6 +266,7 @@ I created this project as an alternative to grunt-ember-handlebars for the follo
 
 ## Release History
 
+* 2013/11/20 - v0.4.17 - Added `templateCompilerPath` and `handlebarsPath` option. Thanks @rjackson!
 * 2013/11/04 - v0.4.16 - Added `preprocess` option. Thanks @timrwood!
 * 2013/09/25 - v0.4.15 - Added `templateRegistration` option. Thanks @lukemelia!
 * 2013/09/05 - v0.4.14 - Now using lowercase module name `ember` with `amd` option. Thanks @rpflorence!
