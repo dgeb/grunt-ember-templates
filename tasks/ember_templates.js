@@ -14,8 +14,6 @@ module.exports = function(grunt) {
   var path               = require('path');
 
   var libDir             = __dirname + '/../lib';
-  var handlebarsJs       = fs.readFileSync(libDir + '/handlebars.js', 'utf8');
-  var templateCompilerJs = fs.readFileSync(libDir + '/ember-template-compiler.js', 'utf8');
 
   var emberTemplatesTask = function() {
     var options = this.options({
@@ -35,10 +33,15 @@ module.exports = function(grunt) {
       },
       templateRegistration: function(name, contents) {
         return 'Ember.TEMPLATES[' + JSON.stringify(name) + '] = ' + contents + ';'
-      }
+      },
+      handlebarsPath: libDir + '/handlebars.js',
+      templateCompilerPath: libDir + '/ember-template-compiler.js'
     });
 
     grunt.verbose.writeflags(options, 'Options');
+
+    var handlebarsJs       = fs.readFileSync(options.handlebarsPath, 'utf8');
+    var templateCompilerJs = fs.readFileSync(options.templateCompilerPath, 'utf8');
 
     // Iterate files
     this.files.forEach(function(f) {

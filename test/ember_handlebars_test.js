@@ -100,5 +100,24 @@ exports.handlebars = {
     test.equal(actual, expected, 'should allow for custom generation of registration code');
 
     test.done();
+  },
+  custom_template_compiler_path: function(test){
+    'use strict';
+    test.expect(1);
+
+    var actual = grunt.file.read('tmp/custom_template_compiler_path.js');
+    test.ok(/Some random text here/.test(actual), 'should use the provided templateCompilerPath');
+
+    test.done();
+  },
+  custom_handlebars_path: function(test){
+    'use strict';
+    test.expect(1);
+
+    var actual = grunt.file.read('tmp/custom_handlebars_path.js');
+
+    test.ok(/WOOT/.test(actual), 'should use the provided handlebarsPath');
+
+    test.done();
   }
 };
