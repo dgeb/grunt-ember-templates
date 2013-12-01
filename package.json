@@ -32,10 +32,12 @@
     "grunt-contrib-nodeunit": "~0.1.2",
     "grunt-contrib-clean": "~0.4.0",
     "grunt-contrib-internal": "~0.4.2",
-    "grunt": "~0.4.0"
+    "grunt": "~0.4.0",
+    "ember-template-compiler": ">=1 <2"
   },
   "peerDependencies": {
-    "grunt": "~0.4.0"
+    "grunt": "~0.4.0",
+    "ember-template-compiler": ">=1 <2"
   },
   "keywords": [
     "gruntplugin",
