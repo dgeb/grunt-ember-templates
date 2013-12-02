@@ -51,6 +51,16 @@ exports.handlebars = {
 
     test.done();
   },
+  remove_leading_slash: function(test) {
+    'use strict';
+    test.expect(1);
+
+    var actual = grunt.file.read('tmp/remove_leading_slash.js');
+    var expected = grunt.file.read('test/expected/truncate_base_path.js');
+    test.equal(actual, expected, 'should remove leading slash from template names');
+
+    test.done();
+  },
   custom_template_name: function(test) {
     'use strict';
     test.expect(1);

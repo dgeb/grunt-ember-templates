@@ -29,6 +29,11 @@ module.exports = function(grunt) {
             file = file.replace(match, '');
           }
         });
+
+        if (file.charAt(0) === '/'){
+          file = file.slice(1);
+        }
+
         return options.templateName(file);
       },
       templateRegistration: function(name, contents) {
