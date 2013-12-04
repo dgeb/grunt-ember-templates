@@ -54,7 +54,8 @@ module.exports = function(grunt) {
           }
         });
 
-        if (file.charAt(0) === '/'){
+        // Remove leading slash if necessary
+        if (file.charAt(0) === '/') {
           file = file.slice(1);
         }
 
