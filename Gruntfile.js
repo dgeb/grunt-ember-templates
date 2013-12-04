@@ -129,15 +129,7 @@ module.exports = function(grunt) {
                                          'test/fixtures/simple.hbs']
         }
       },
-      customTemplateCompilerPath: {
-        options: {
-          templateCompilerPath: 'test/fixtures/dummy-template-compiler.js'
-        },
-        files: {
-          'tmp/custom_template_compiler_path.js': ['test/fixtures/text.hbs']
-        }
-      },
-      customHandlebarsPath: {
+      customTemplateCompiler: {
         options: {
           handlebarsPath: 'test/fixtures/dummy-handlebars.js',
           templateCompilerPath: 'test/fixtures/dummy-template-compiler.js'

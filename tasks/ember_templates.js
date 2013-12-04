@@ -6,13 +6,46 @@
  * https://github.com/dgeb/grunt-ember-templates/blob/master/LICENSE
  */
 
-module.exports = function(grunt) {
+function manualCompile(handlebarsPath, templateCompilerPath, template){
   'use strict';
 
   var fs                 = require('fs');
   var vm                 = require('vm');
   var path               = require('path');
+  var handlebarsJs, templateCompilerJs;
 
+  if (handlebarsPath) {
+    handlebarsJs = fs.readFileSync(handlebarsPath, 'utf8');
+  }
+
+  if (templateCompilerPath) {
+    templateCompilerJs = fs.readFileSync(templateCompilerPath, 'utf8');
+  }
+
+  // Create a context into which we will load both the ember template compiler
+  // as well as the template to be compiled. The ember template compiler expects
+  // `exports` to be defined, and uses it to export `precompile()`.
+  var context = vm.createContext({
+    exports: {},
+    template: template
+  });
+
+  // Load handlebars
+  vm.runInContext(handlebarsJs, context, 'handlebars.js');
+
+  // Load the ember template compiler
+  vm.runInContext(templateCompilerJs, context, 'ember-template-compiler.js');
+
+  // Compile the template
+  vm.runInContext('compiledJS = exports.precompile(template);', context);
+
+  return context.compiledJS;
+};
+
+module.exports = function(grunt) {
+  'use strict';
+
+  var compiler           = require('ember-template-compiler');
   var libDir             = __dirname + '/../lib';
 
   var emberTemplatesTask = function() {
@@ -34,14 +67,11 @@ module.exports = function(grunt) {
       templateRegistration: function(name, contents) {
         return 'Ember.TEMPLATES[' + JSON.stringify(name) + '] = ' + contents + ';'
       },
-      handlebarsPath: libDir + '/handlebars.js',
-      templateCompilerPath: libDir + '/ember-template-compiler.js'
+      handlebarsPath: null,
+      templateCompilerPath: null
     });
 
     grunt.verbose.writeflags(options, 'Options');
-
-    var handlebarsJs       = fs.readFileSync(options.handlebarsPath, 'utf8');
-    var templateCompilerJs = fs.readFileSync(options.templateCompilerPath, 'utf8');
 
     // Iterate files
     this.files.forEach(function(f) {
@@ -62,32 +92,21 @@ module.exports = function(grunt) {
           if (options.precompile) {
 
             var template = grunt.file.read(file);
+            var compiledTemplate;
 
             // Run the `preprocess` function if specified in the options.
             if (typeof options.preprocess === 'function') {
               template = options.preprocess(template);
             }
 
-            // Create a context into which we will load both the ember template compiler
-            // as well as the template to be compiled. The ember template compiler expects
-            // `exports` to be defined, and uses it to export `precompile()`.
-            var context = vm.createContext({
-              exports: {},
-              template: template
-            });
-
-            // Load handlebars
-            vm.runInContext(handlebarsJs, context, 'handlebars.js');
-
-            // Load the ember template compiler
-            vm.runInContext(templateCompilerJs, context, 'ember-template-compiler.js');
-
-            // Compile the template
-            vm.runInContext('compiledJS = exports.precompile(template);', context);
+            if (options.handlebarsPath && options.templateCompilerPath) {
+              compiledTemplate = manualCompile(options.handlebarsPath, options.templateCompilerPath, template);
+            } else {
+              compiledTemplate = compiler.precompile(template).toString();
+            }
 
             // Wrap compiled template
-            contents = 'Ember.Handlebars.template(' + context.compiledJS + ')';
-
+            contents = 'Ember.Handlebars.template(' + compiledTemplate + ')';
           } else {
             // Wrap raw (uncompiled) template
             contents = 'Ember.Handlebars.compile(' + JSON.stringify(grunt.file.read(file)) + ')';
