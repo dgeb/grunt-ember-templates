@@ -258,6 +258,7 @@ I created this project as an alternative to grunt-ember-handlebars for the follo
 
 ## Release History
 
+* 2013/12/04 - v0.4.18 - Introduced `ember-template-compiler` dependency. Thanks @rjackson!
 * 2013/11/20 - v0.4.17 - Added `templateCompilerPath` and `handlebarsPath` option. Thanks @rjackson!
 * 2013/11/04 - v0.4.16 - Added `preprocess` option. Thanks @timrwood!
 * 2013/09/25 - v0.4.15 - Added `templateRegistration` option. Thanks @lukemelia!
