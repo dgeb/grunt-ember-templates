@@ -69,6 +69,16 @@ module.exports = function(grunt) {
                                         'test/fixtures/grandparent/parent/child.hbs']
         }
       },
+      removeLeadingSlash: {
+        options: {
+          templateBasePath: /test\/fixtures/
+        },
+        files: {
+          'tmp/remove_leading_slash.js': ['test/fixtures/text.hbs',
+                                          'test/fixtures/simple.hbs',
+                                          'test/fixtures/grandparent/parent/child.hbs']
+        }
+      },
       customTemplateName: {
         options: {
           templateName: function(name) {
