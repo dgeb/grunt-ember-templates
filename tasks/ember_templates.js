@@ -9,18 +9,10 @@
 function manualCompile(handlebarsPath, templateCompilerPath, template){
   'use strict';
 
-  var fs                 = require('fs');
-  var vm                 = require('vm');
-  var path               = require('path');
-  var handlebarsJs, templateCompilerJs;
-
-  if (handlebarsPath) {
-    handlebarsJs = fs.readFileSync(handlebarsPath, 'utf8');
-  }
-
-  if (templateCompilerPath) {
-    templateCompilerJs = fs.readFileSync(templateCompilerPath, 'utf8');
-  }
+  var fs                 = require('fs'),
+      vm                 = require('vm'),
+      handlebarsJs       = fs.readFileSync(handlebarsPath, 'utf8'),
+      templateCompilerJs = fs.readFileSync(templateCompilerPath, 'utf8');
 
   // Create a context into which we will load both the ember template compiler
   // as well as the template to be compiled. The ember template compiler expects
@@ -45,8 +37,7 @@ function manualCompile(handlebarsPath, templateCompilerPath, template){
 module.exports = function(grunt) {
   'use strict';
 
-  var compiler           = require('ember-template-compiler');
-  var libDir             = __dirname + '/../lib';
+  var compiler = require('ember-template-compiler');
 
   var emberTemplatesTask = function() {
     var options = this.options({
