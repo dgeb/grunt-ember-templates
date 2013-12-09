@@ -28,7 +28,7 @@ Type: `object`
 
 This defines what files this task will process and should contain key:value pairs.
 
-The key (destination) should be an unique filepath (supports [grunt.template](https://github.com/cowboy/grunt/blob/master/docs/api_template.md)) and the value (source) should be a filepath or an array of filepaths (supports [minimatch](https://github.com/isaacs/minimatch)).
+The key (destination) should be an unique filepath (supports [grunt.template](http://gruntjs.com/api/grunt.template)) and the value (source) should be a filepath or an array of filepaths (supports [minimatch](https://github.com/isaacs/minimatch)).
 
 Note: Values are precompiled to the `Ember.TEMPLATES` array in the order passed.
 
