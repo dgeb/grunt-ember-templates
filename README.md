@@ -42,7 +42,7 @@ This controls how this task operates and should contain key:value pairs. See spe
 
 ##### amd
 
-Type: `boolean`
+Type: `boolean | string`
 Default: `false`
 
 Include this option to ensure that the compiled output will be defined as a
@@ -50,9 +50,13 @@ single AMD module with a single dependency (`ember`). If you'd like to output
 individual templates as modules, skip this option and use the
 `templateRegistration` option described below.
 
+If you'd like to customize the module name for Ember, pass this option a string.
+(For backwards compatibility, the string `"true"` acts like the boolean `true`,
+and will result in `ember` being used as the module name. )
+
 ``` javascript
 options: {
-  amd: true
+  amd: "vendor/ember"
 }
 ```
 

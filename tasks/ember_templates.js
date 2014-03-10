@@ -75,10 +75,13 @@ module.exports = function(grunt) {
       var processedTemplates = [],
           output = [],
           name,
+          customAmd,
           contents;
 
       if (options.amd) {
-        output = output.concat('define(["ember"], function(Ember){');
+        customAmd = typeof options.amd === 'string' && options.amd !== 'true';
+        customAmd = customAmd ? options.amd : 'ember';
+        output = output.concat('define(["' + customAmd + '"], function(Ember){');
       }
 
       f.src.forEach(function(file) {
