@@ -262,6 +262,7 @@ I created this project as an alternative to grunt-ember-handlebars for the follo
 
 ## Release History
 
+* 2014/03/11 - v0.4.20 - `amd` option can now accept a string to define Ember's module name. Thanks @Kerrick!
 * 2014/03/02 - v0.4.19 - Require node to be >= 0.8.19 to avoid peerDependencies issue. Thanks @rjackson!
 * 2013/12/04 - v0.4.18 - Introduced `ember-template-compiler` dependency. Thanks @rjackson!
 * 2013/11/20 - v0.4.17 - Added `templateCompilerPath` and `handlebarsPath` option. Thanks @rjackson!
