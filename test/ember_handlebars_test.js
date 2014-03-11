@@ -21,6 +21,26 @@ exports.handlebars = {
 
     test.done();
   },
+  amd_string_true: function(test) {
+    'use strict';
+    test.expect(1);
+
+    var actual = grunt.file.read('tmp/amd_string_true.js');
+    var expected = grunt.file.read('test/expected/amd.js');
+    test.equal(actual, expected, 'should compile handlebars templates with backwards compatible AMD wrappers');
+
+    test.done();
+  },
+  amd_custom: function(test) {
+    'use strict';
+    test.expect(1);
+
+    var actual = grunt.file.read('tmp/amd_custom.js');
+    var expected = grunt.file.read('test/expected/amd_custom.js');
+    test.equal(actual, expected, 'should compile handlebars templates with custom AMD wrappers');
+
+    test.done();
+  },
   file_pattern_matching: function(test) {
     'use strict';
     test.expect(1);

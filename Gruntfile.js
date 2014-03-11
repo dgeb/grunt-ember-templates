@@ -45,6 +45,26 @@ module.exports = function(grunt) {
                          'test/fixtures/grandparent/parent/child.hbs']
         }
       },
+      amdStringTrue: {
+        options: {
+          amd: 'true'
+        },
+        files: {
+          'tmp/amd_string_true.js': ['test/fixtures/text.hbs',
+                                     'test/fixtures/simple.hbs',
+                                     'test/fixtures/grandparent/parent/child.hbs']
+        }
+      },
+      amdCustom: {
+        options: {
+          amd: 'custom'
+        },
+        files: {
+          'tmp/amd_custom.js': ['test/fixtures/text.hbs',
+                                'test/fixtures/simple.hbs',
+                                'test/fixtures/grandparent/parent/child.hbs']
+        }
+      },
       filePatternMatching: {
         files: {
           'tmp/file_pattern_matching.js': 'test/fixtures/{simple,text}.hbs'
