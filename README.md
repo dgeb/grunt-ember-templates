@@ -60,6 +60,28 @@ options: {
 }
 ```
 
+##### concatenate
+
+Type: `boolean`
+Default: `true`
+
+Disable this option to compile the templates to multiple individual files,
+rather than concatenating them into a single file. When concatenation is
+disabled, the destination property specifies the folder where compiled templates
+will be placed. The directory and file structure will mirror the source.
+
+This option is useful for situations where you'd like to let a build optimizer
+concatenate files in particular ways.
+
+``` javascript
+options: {
+  concatenate: false
+},
+files: {
+  "path/to/destination/folder": ["path/to/sources/*.handlebars", "path/to/more/*.handlebars"]
+}
+```
+
 ##### precompile
 
 Type: `boolean`
