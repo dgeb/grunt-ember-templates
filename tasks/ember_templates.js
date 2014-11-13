@@ -115,7 +115,7 @@ module.exports = function(grunt) {
             if (options.handlebarsPath && options.templateCompilerPath) {
               compiledTemplate = manualCompile(options.handlebarsPath, options.templateCompilerPath, template);
             } else {
-              compiledTemplate = compiler.precompile(template).toString();
+              compiledTemplate = compiler.precompile(template, false).toString();
             }
 
             // Wrap compiled template
