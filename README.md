@@ -284,6 +284,7 @@ I created this project as an alternative to grunt-ember-handlebars for the follo
 
 ## Release History
 
+* 2014/11/17 - v0.5.0-alpha - Handlebars 2.0 compatibility via alpha ember-template-compiler. Thanks @smounir!
 * 2014/10/29 - v0.4.23 - Fixed peer dependencies issue for `ember-template-compiler` 1.8.x
 * 2014/10/23 - v0.4.22 - Updated `ember-template-compiler` peer dependencies for Handlebars 1.x compatibility. Thanks @cyril-sf!
 * 2014/04/02 - v0.4.21 - Introduced `concatenate` option. Thanks @joshvfleming!
