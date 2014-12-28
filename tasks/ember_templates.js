@@ -18,6 +18,7 @@ function manualCompile(handlebarsPath, templateCompilerPath, template){
   // as well as the template to be compiled. The ember template compiler expects
   // `exports` to be defined, and uses it to export `precompile()`.
   var context = vm.createContext({
+    module: {},
     exports: {},
     template: template
   });
@@ -29,7 +30,7 @@ function manualCompile(handlebarsPath, templateCompilerPath, template){
   vm.runInContext(templateCompilerJs, context, 'ember-template-compiler.js');
 
   // Compile the template
-  vm.runInContext('compiledJS = exports.precompile(template);', context);
+  vm.runInContext('compiledJS = (module.exports || exports).precompile(template);', context);
 
   return context.compiledJS;
 };
@@ -78,7 +79,8 @@ module.exports = function(grunt) {
         return 'Ember.TEMPLATES[' + JSON.stringify(name) + '] = ' + contents + ';'
       },
       handlebarsPath: null,
-      templateCompilerPath: null
+      templateCompilerPath: null,
+      templateNamespace: 'Handlebars'
     });
 
     grunt.verbose.writeflags(options, 'Options');
@@ -119,10 +121,10 @@ module.exports = function(grunt) {
             }
 
             // Wrap compiled template
-            contents = 'Ember.Handlebars.template(' + compiledTemplate + ')';
+            contents = 'Ember.' + options.templateNamespace + '.template(' + compiledTemplate + ')';
           } else {
             // Wrap raw (uncompiled) template
-            contents = 'Ember.Handlebars.compile(' + JSON.stringify(grunt.file.read(file)) + ')';
+            contents = 'Ember.' + options.templateNamespace + '.compile(' + JSON.stringify(grunt.file.read(file)) + ')';
           }
 
           processedTemplates.push({

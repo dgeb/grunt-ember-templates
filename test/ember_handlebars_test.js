@@ -141,6 +141,16 @@ exports.handlebars = {
 
     test.done();
   },
+  custom_template_namespace: function(test){
+    'use strict';
+    test.expect(1);
+
+    var actual = grunt.file.read('tmp/custom_template_namespace.js');
+
+    test.ok(/Ember\.HTMLBars\.template/.test(actual), 'should use the provided namespace');
+
+    test.done();
+  },
   concatenate_disabled: function(test){
     'use strict';
     test.expect(3);
