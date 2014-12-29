@@ -168,6 +168,14 @@ module.exports = function(grunt) {
           'tmp/custom_handlebars_path.js': ['test/fixtures/text.hbs']
         }
       },
+      customTemplateNamespace: {
+        options: {
+          templateNamespace: 'HTMLBars'
+        },
+        files: {
+          'tmp/custom_template_namespace.js': ['test/fixtures/text.hbs']
+        }
+      },
       concatenateDisabled: {
         options: {
           concatenate: false,
