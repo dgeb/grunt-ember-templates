@@ -80,7 +80,7 @@ module.exports = function(grunt) {
       },
       handlebarsPath: null,
       templateCompilerPath: null,
-      templateNamespace: 'Handlebars'
+      templateNamespace: 'HTMLBars'
     });
 
     grunt.verbose.writeflags(options, 'Options');

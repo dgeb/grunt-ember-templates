@@ -1,8 +1,8 @@
-define('templates/test/fixtures/text', ['ember'], function(Ember) { return Ember.Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+define('templates/test/fixtures/text', ['ember'], function(Ember) { return Ember.HTMLBars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   data.buffer.push("Basic template that does nothing.");
   },"useData":true}); });
 
-define('templates/test/fixtures/simple', ['ember'], function(Ember) { return Ember.Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+define('templates/test/fixtures/simple', ['ember'], function(Ember) { return Ember.HTMLBars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   var stack1, buffer = '';
   data.buffer.push("<p>Hello, my name is ");
   stack1 = helpers._triageMustache.call(depth0, "name", {"name":"_triageMustache","hash":{},"hashTypes":{},"hashContexts":{},"types":["ID"],"contexts":[depth0],"data":data});

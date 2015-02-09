@@ -147,7 +147,7 @@ exports.handlebars = {
 
     var actual = grunt.file.read('tmp/custom_template_namespace.js');
 
-    test.ok(/Ember\.HTMLBars\.template/.test(actual), 'should use the provided namespace');
+    test.ok(/Ember\.Handlebars\.template/.test(actual), 'should use the provided namespace');
 
     test.done();
   },
