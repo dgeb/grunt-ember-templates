@@ -43,6 +43,7 @@
   "keywords": [
     "gruntplugin",
     "ember",
-    "handlebars"
+    "handlebars",
+    "htmlbars"
   ]
 }

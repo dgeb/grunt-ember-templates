@@ -170,7 +170,7 @@ module.exports = function(grunt) {
       },
       customTemplateNamespace: {
         options: {
-          templateNamespace: 'HTMLBars'
+          templateNamespace: 'Handlebars'
         },
         files: {
           'tmp/custom_template_namespace.js': ['test/fixtures/text.hbs']
