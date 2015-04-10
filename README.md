@@ -18,6 +18,19 @@ Once the plugin has been installed, it may be enabled inside your Gruntfile with
 grunt.loadNpmTasks('grunt-ember-templates');
 ```
 
+#### Using Ember v1.10+?
+
+If you're using a version of Ember greater than 1.9.1, you will need to configure grunt-ember-templates differently. The Ember template compiler now ships exclusively with the Ember dependency itself, so the path to that file will need to be configured specifically. Retrieve both the Ember AND the Handlebars dependencies, and include the path in the options object used by the `emberTemplates` task.
+
+Required for Ember v1.10+:
+```javascript
+options: {
+  templateCompilerPath: 'vendor/ember/ember-template-compiler.js',
+  handlebarsPath: 'vendor/handlebars/handlebars.js'
+}
+```
+See the documentation below for more information on these options.
+
 ### Overview
 
 Inside your `Gruntfile.js` file, add a section named `emberTemplates`. This section specifies the files to compile and the options used with [handlebars](http://handlebarsjs.com/).
