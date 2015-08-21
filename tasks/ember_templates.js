@@ -16,10 +16,12 @@ function manualCompile(handlebarsPath, templateCompilerPath, template){
 
   // Create a context into which we will load both the ember template compiler
   // as well as the template to be compiled. The ember template compiler expects
-  // `exports` to be defined, and uses it to export `precompile()`.
+  // `exports` to be defined, and uses it to export `precompile()`. It also
+  // expects `global` to be defined and to be an object.
   var context = vm.createContext({
     module: {},
     exports: {},
+    global: {},
     template: template
   });
 
