@@ -1,0 +1,6 @@
+{
+  "name": "grunt-ember-templates",
+  "dependencies": {
+    "ember": "~1.12.2"
+  }
+}

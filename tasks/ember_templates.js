@@ -6,13 +6,19 @@
  * https://github.com/dgeb/grunt-ember-templates/blob/master/LICENSE
  */
 
-function manualCompile(handlebarsPath, templateCompilerPath, template){
+function manualCompile(handlebarsPath, templateCompilerPath, template, grunt){
   'use strict';
 
-  var fs                 = require('fs'),
-      vm                 = require('vm'),
-      handlebarsJs       = fs.readFileSync(handlebarsPath, 'utf8'),
-      templateCompilerJs = fs.readFileSync(templateCompilerPath, 'utf8');
+  var fs = require('fs'),
+      vm = require('vm');
+
+  try {
+    var handlebarsJs       = fs.readFileSync(handlebarsPath, 'utf8'),
+        templateCompilerJs = fs.readFileSync(templateCompilerPath, 'utf8');
+  } catch (e) {
+    if (e.code !== 'ENOENT') throw e;
+    grunt.fail.warn('Please setup handlebarsPath and templateCompilerPath in options. It has to point to ember-template-compiler.js which bundled with Ember.js. The default path: bower_components/ember/ember-template-compiler.js');
+  }
 
   // Create a context into which we will load both the ember template compiler
   // as well as the template to be compiled. The ember template compiler expects
@@ -35,12 +41,11 @@ function manualCompile(handlebarsPath, templateCompilerPath, template){
   vm.runInContext('compiledJS = (module.exports || exports).precompile(template);', context);
 
   return context.compiledJS;
-};
+}
 
 module.exports = function(grunt) {
   'use strict';
 
-  var compiler = require('ember-template-compiler');
   var path = require('path');
 
   var writeFile = function(contents, dest, options) {
@@ -78,10 +83,10 @@ module.exports = function(grunt) {
         return options.templateName(file);
       },
       templateRegistration: function(name, contents) {
-        return 'Ember.TEMPLATES[' + JSON.stringify(name) + '] = ' + contents + ';'
+        return 'Ember.TEMPLATES[' + JSON.stringify(name) + '] = ' + contents + ';';
       },
-      handlebarsPath: null,
-      templateCompilerPath: null,
+      handlebarsPath: 'bower_components/ember/ember-template-compiler.js',
+      templateCompilerPath: 'bower_components/ember/ember-template-compiler.js',
       templateNamespace: 'HTMLBars'
     });
 
@@ -117,9 +122,9 @@ module.exports = function(grunt) {
             }
 
             if (options.handlebarsPath && options.templateCompilerPath) {
-              compiledTemplate = manualCompile(options.handlebarsPath, options.templateCompilerPath, template);
+              compiledTemplate = manualCompile(options.handlebarsPath, options.templateCompilerPath, template, grunt);
             } else {
-              compiledTemplate = compiler.precompile(template, false).toString();
+              grunt.fail.warn('Please setup handlebarsPath and templateCompilerPath in options. It has to point to ember-template-compiler.js which bundled with Ember.js. The default path: bower_components/ember/ember-template-compiler.js');
             }
 
             // Wrap compiled template
