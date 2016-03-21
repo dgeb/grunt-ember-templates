@@ -1,3 +1,3 @@
 exports.precompile = function(){
-  return "Version: " + Handlebars.VERSION + " - 'Some random text here'";
-}
+  return "Version: WOOT CUSTOM HANDLEBARS - 'Some random text here'";
+};

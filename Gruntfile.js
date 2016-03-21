@@ -16,7 +16,7 @@ module.exports = function(grunt) {
         undef: true,
         boss: true,
         eqnull: true,
-        node: true,
+        node: true
       }
     },
 
@@ -160,7 +160,6 @@ module.exports = function(grunt) {
       },
       customTemplateCompiler: {
         options: {
-          handlebarsPath: 'test/fixtures/dummy-handlebars.js',
           templateCompilerPath: 'test/fixtures/dummy-template-compiler.js'
         },
         files: {
