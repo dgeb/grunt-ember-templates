@@ -10,12 +10,15 @@ function manualCompile(templateCompilerPath, template, grunt){
   'use strict';
 
   var fs = require('fs'),
-      vm = require('vm');
+      vm = require('vm'),
+      templateCompilerJs;
 
   try {
-    var templateCompilerJs = fs.readFileSync(templateCompilerPath, 'utf8');
+    templateCompilerJs = fs.readFileSync(templateCompilerPath, 'utf8');
   } catch (e) {
-    if (e.code !== 'ENOENT') throw e;
+    if (e.code !== 'ENOENT') {
+      throw e;
+    }
     grunt.fail.warn('Please setup templateCompilerPath in options. It has to point to ember-template-compiler.js which bundled with Ember.js. The default path: bower_components/ember/ember-template-compiler.js');
   }
 
@@ -81,6 +84,7 @@ module.exports = function(grunt) {
       templateRegistration: function(name, contents) {
         return 'Ember.TEMPLATES[' + JSON.stringify(name) + '] = ' + contents + ';';
       },
+      // Default location of the compiler when ember installed with bower.
       templateCompilerPath: 'bower_components/ember/ember-template-compiler.js',
       templateNamespace: 'HTMLBars'
     });

@@ -141,34 +141,34 @@ exports.handlebars = {
   
     test.done();
   },
-  // custom_template_namespace: function(test){
-  //   'use strict';
-  //   test.expect(1);
-  //
-  //   var actual = grunt.file.read('tmp/custom_template_namespace.js');
-  //
-  //   test.ok(/Ember\.Handlebars\.template/.test(actual), 'should use the provided namespace');
-  //
-  //   test.done();
-  // },
-  // concatenate_disabled: function(test){
-  //   'use strict';
-  //   test.expect(3);
-  //
-  //   var desc = 'should write individual files if concatenation is disabled';
-  //
-  //   var actual = grunt.file.read('tmp/dest/test/fixtures/text.js');
-  //   var expected = grunt.file.read('test/expected/text.js');
-  //   test.equal(actual, expected, desc);
-  //
-  //   actual = grunt.file.read('tmp/dest/test/fixtures/simple.js');
-  //   expected = grunt.file.read('test/expected/simple.js');
-  //   test.equal(actual, expected, desc);
-  //
-  //   actual = grunt.file.read('tmp/dest/slash/test/fixtures/simple.js');
-  //   expected = grunt.file.read('test/expected/simple.js');
-  //   test.equal(actual, expected, desc);
-  //
-  //   test.done();
-  // }
+  custom_template_namespace: function(test){
+    'use strict';
+    test.expect(1);
+
+    var actual = grunt.file.read('tmp/custom_template_namespace.js');
+
+    test.ok(/Ember\.Handlebars\.template/.test(actual), 'should use the provided namespace');
+
+    test.done();
+  },
+  concatenate_disabled: function(test){
+    'use strict';
+    test.expect(3);
+
+    var desc = 'should write individual files if concatenation is disabled';
+
+    var actual = grunt.file.read('tmp/dest/test/fixtures/text.js');
+    var expected = grunt.file.read('test/expected/text.js');
+    test.equal(actual, expected, desc);
+
+    actual = grunt.file.read('tmp/dest/test/fixtures/simple.js');
+    expected = grunt.file.read('test/expected/simple.js');
+    test.equal(actual, expected, desc);
+
+    actual = grunt.file.read('tmp/dest/slash/test/fixtures/simple.js');
+    expected = grunt.file.read('test/expected/simple.js');
+    test.equal(actual, expected, desc);
+
+    test.done();
+  }
 };

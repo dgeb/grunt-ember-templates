@@ -176,7 +176,7 @@ module.exports = function(grunt) {
       },
       concatenateDisabled: {
         options: {
-          concatenate: false,
+          concatenate: false
         },
         files: {
           'tmp/dest': ['test/fixtures/text.hbs',
