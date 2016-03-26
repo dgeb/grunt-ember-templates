@@ -19,7 +19,7 @@ function manualCompile(templateCompilerPath, template, grunt){
     if (e.code !== 'ENOENT') {
       throw e;
     }
-    grunt.fail.warn('Please setup templateCompilerPath in options. It has to point to ember-template-compiler.js which bundled with Ember.js. The default path: bower_components/ember/ember-template-compiler.js');
+    grunt.fail.warn('ember-template-compiler.js is not found. You can install with `bower install ember --save`. If you would like to use a custom location you can setup `templateCompilerPath` option in Gruntfile.js. It has to point to ember-template-compiler.js which bundled with Ember.js. The default path: bower_components/ember/ember-template-compiler.js');
   }
 
   // Create a context into which we will load both the ember template compiler

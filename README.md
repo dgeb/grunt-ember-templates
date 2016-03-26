@@ -4,7 +4,7 @@
 
 ## Getting Started
 
-This plugin requires Grunt `~0.4.0`
+This plugin requires Grunt `^0.4.5`.
 
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
@@ -17,19 +17,43 @@ Once the plugin has been installed, it may be enabled inside your Gruntfile with
 ```js
 grunt.loadNpmTasks('grunt-ember-templates');
 ```
+### Grunt Ember Templates v1.0 compatible with Ember v1.10+
 
-#### Using Ember v1.10+?
+If you use earlier version of Ember, please use the `grunt-ember-templates` `v0.6`.
 
-If you're using a version of Ember greater than 1.9.1, you will need to configure grunt-ember-templates differently. The Ember template compiler now ships exclusively with the Ember dependency itself, so the path to that file will need to be configured specifically. Retrieve both the Ember AND the Handlebars dependencies, and include the path in the options object used by the `emberTemplates` task.
+### Getting Started
 
-Required for Ember v1.10+:
+* Install Ember.js with bower: `$ bower install ember --save`
+* Install this package with: `$ npm install grunt-ember-templates@~1.0.0 --save-dev`
+* Create an `app/templates` folder for your `hbs` files. Create a few `hbs` files there.
+* Create a basic `Gruntfile.js`:
+
 ```javascript
-options: {
-  templateCompilerPath: 'vendor/ember/ember-template-compiler.js',
-  handlebarsPath: 'vendor/handlebars/handlebars.js'
+module.exports = function(grunt) {
+
+  grunt.loadNpmTasks('grunt-ember-templates');
+
+  grunt.initConfig({
+    emberTemplates: {
+      default: {
+        options: {
+          templateBasePath: 'app/templates'
+        },
+        files: {
+          "tmp/templates.js": ["app/templates/**/*.hbs"]
+        }
+      }
+    }
+  })
+
+  grunt.registerTask('default', ['emberTemplates']);
 }
 ```
-See the documentation below for more information on these options.
+
+* (Optional: Install grunt-cli with `$ npm install -g grunt-cli` and install `grunt` locally with `$ npm install grunt --save-dev`.)
+* Run `grunt` in your console.
+
+You can find the compiled `templates.js` in `tmp` folder.
 
 ### Overview
 
@@ -230,29 +254,22 @@ options: {
 }
 ```
 
-##### templateCompilerPath and handlebarsPath
+##### templateCompilerPath
 
 Type: `string`
-Default: Not specified
+Default: `bower_components/ember/ember-template-compiler.js`
 
-By default, the template compiler and Handlebars included with the
-`ember-template-compiler` dependency will be used to compile templates.
-
-This option allows these defaults to be overridden in order to specify
-different versions of the template compiler and Handlebars.
+This option allows this default to be overridden to different version of the `ember-template-compiler.js`.
 
 For example, if there are upstream changes in Ember's compiler that haven't yet
 been published with `ember-template-compiler`, you could specify paths to local
-versions of the template compiler and Handlebars as follows:
+versions of the template compiler:
 
 ```javascript
 options: {
-  templateCompilerPath: 'vendor/ember/ember-template-compiler.js',
-  handlebarsPath: 'vendor/handlebars/handlebars.js'
+  templateCompilerPath: 'vendor/ember/ember-template-compiler.js'
 }
 ```
-
-IMPORTANT: These options must both be specified, or neither will take effect.
 
 #### Config Example
 
@@ -312,6 +329,9 @@ I created this project as an alternative to grunt-ember-handlebars for the follo
 
 ## Release History
 
+* 2016/03/28 - v1.0.0 - Removed `ember-template-compiler` and `handlebar` npm dependencies.
+                        Removed `handlebarsPath` option.
+                        Default: using the bundled `ember-template-compiler.js` from Ember.js bower package.
 * 2015/02/09 - v0.5.0 - HTMLBars is now the default template namespace.
 * 2014/11/17 - v0.5.0-alpha - Handlebars 2.0 compatibility via alpha ember-template-compiler. Thanks @smounir!
 * 2014/10/29 - v0.4.23 - Fixed peer dependencies issue for `ember-template-compiler` 1.8.x
