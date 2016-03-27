@@ -17,11 +17,11 @@ Once the plugin has been installed, it may be enabled inside your Gruntfile with
 ```js
 grunt.loadNpmTasks('grunt-ember-templates');
 ```
-### Grunt Ember Templates v1.0 compatible with Ember v1.10+
+### grunt-ember-templates v1.0 compatible with Ember v1.10+
 
 If you use earlier version of Ember, please use the `grunt-ember-templates` `v0.6`.
 
-### Getting Started
+### The most basic example
 
 * Install Ember.js with bower: `$ bower install ember --save`
 * Install this package with: `$ npm install grunt-ember-templates@~1.0.0 --save-dev`
