@@ -16,8 +16,7 @@ module.exports = function(grunt) {
         undef: true,
         boss: true,
         eqnull: true,
-        node: true,
-        es5: true
+        node: true
       }
     },
 
@@ -161,7 +160,6 @@ module.exports = function(grunt) {
       },
       customTemplateCompiler: {
         options: {
-          handlebarsPath: 'test/fixtures/dummy-handlebars.js',
           templateCompilerPath: 'test/fixtures/dummy-template-compiler.js'
         },
         files: {
@@ -178,7 +176,7 @@ module.exports = function(grunt) {
       },
       concatenateDisabled: {
         options: {
-          concatenate: false,
+          concatenate: false
         },
         files: {
           'tmp/dest': ['test/fixtures/text.hbs',

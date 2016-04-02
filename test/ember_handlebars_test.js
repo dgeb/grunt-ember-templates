@@ -14,11 +14,11 @@ exports.handlebars = {
   amd: function(test) {
     'use strict';
     test.expect(1);
-
+  
     var actual = grunt.file.read('tmp/amd.js');
     var expected = grunt.file.read('test/expected/amd.js');
     test.equal(actual, expected, 'should compile handlebars templates with AMD wrappers');
-
+  
     test.done();
   },
   amd_string_true: function(test) {
@@ -44,11 +44,11 @@ exports.handlebars = {
   file_pattern_matching: function(test) {
     'use strict';
     test.expect(1);
-
+  
     var actual = grunt.file.read('tmp/file_pattern_matching.js');
     var expected = grunt.file.read('test/expected/file_pattern_matching.js');
     test.equal(actual, expected, 'should compile handlebars templates found by file pattern');
-
+  
     test.done();
   },
   custom_file_extensions: function(test) {
@@ -64,41 +64,41 @@ exports.handlebars = {
   truncate_base_path: function(test) {
     'use strict';
     test.expect(1);
-
+  
     var actual = grunt.file.read('tmp/truncate_base_path.js');
     var expected = grunt.file.read('test/expected/truncate_base_path.js');
     test.equal(actual, expected, 'should truncate base path from template names');
-
+  
     test.done();
   },
   remove_leading_slash: function(test) {
     'use strict';
     test.expect(1);
-
+  
     var actual = grunt.file.read('tmp/remove_leading_slash.js');
     var expected = grunt.file.read('test/expected/truncate_base_path.js');
     test.equal(actual, expected, 'should remove leading slash from template names');
-
+  
     test.done();
   },
   custom_template_name: function(test) {
     'use strict';
     test.expect(1);
-
+  
     var actual = grunt.file.read('tmp/custom_template_name.js');
     var expected = grunt.file.read('test/expected/custom_template_name.js');
     test.equal(actual, expected, 'should allow for custom processing of template names');
-
+  
     test.done();
   },
   custom_template_name_from_file: function(test) {
     'use strict';
     test.expect(1);
-
+  
     var actual = grunt.file.read('tmp/custom_template_name_from_file.js');
     var expected = grunt.file.read('test/expected/custom_template_name_from_file.js');
     test.equal(actual, expected, 'should allow for completely custom processing of template file names');
-
+  
     test.done();
   },
   minify: function(test) {
@@ -124,21 +124,21 @@ exports.handlebars = {
   custom_registration: function(test) {
     'use strict';
     test.expect(1);
-
+  
     var actual = grunt.file.read('tmp/custom_registration.js');
     var expected = grunt.file.read('test/expected/custom_registration.js');
     test.equal(actual, expected, 'should allow for custom generation of registration code');
-
+  
     test.done();
   },
   custom_template_compiler: function(test){
     'use strict';
     test.expect(1);
-
+  
     var actual = grunt.file.read('tmp/custom_handlebars_path.js');
-
-    test.ok(/WOOT/.test(actual), 'should use the provided handlebarsPath');
-
+  
+    test.ok(/WOOT/.test(actual), 'should use the provided templateCompilerPath');
+  
     test.done();
   },
   custom_template_namespace: function(test){
