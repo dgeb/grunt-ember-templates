@@ -37,7 +37,7 @@ function manualCompile(templateCompilerPath, template, grunt){
   vm.runInContext(templateCompilerJs, context, 'ember-template-compiler.js');
 
   // Compile the template
-  vm.runInContext('compiledJS = (module.exports || exports).precompile(template);', context);
+  vm.runInContext('compiledJS = ((typeof Ember !== "undefined" && Ember.HTMLBars) || module.exports || exports).precompile(template);', context);
 
   return context.compiledJS;
 }
