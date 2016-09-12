@@ -329,6 +329,7 @@ I created this project as an alternative to grunt-ember-handlebars for the follo
 
 ## Release History
 
+* 2016/09/12 - v1.1.0 - Add Ember v2.7 and v2.8 support, extend tests for testing multiple Ember versions.
 * 2016/03/28 - v1.0.0 - Removed `ember-template-compiler` and `handlebar` npm dependencies.
                         Removed `handlebarsPath` option.
                         Default: using the bundled `ember-template-compiler.js` from Ember.js bower package.
