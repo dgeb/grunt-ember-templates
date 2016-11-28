@@ -117,7 +117,7 @@ module.exports = function(grunt) {
 
             // Run the `preprocess` function if specified in the options.
             if (typeof options.preprocess === 'function') {
-              template = options.preprocess(template);
+              template = options.preprocess(template, file);
             }
 
             compiledTemplate = manualCompile(options.templateCompilerPath, template, grunt);
