@@ -192,9 +192,6 @@ module.exports = function(grunt) {
       },
       bowerEmber273: {
         command: 'node_modules/.bin/bower uninstall ember && node_modules/.bin/bower install ember#2.7.3'
-      },
-      bowerEmber280: {
-        command: 'node_modules/.bin/bower uninstall ember && node_modules/.bin/bower install ember#2.8.0'
       }
     },
 
@@ -202,7 +199,6 @@ module.exports = function(grunt) {
     nodeunit: {
       ember112: ['test/ember_1_12_2_handlebars_test.js'],
       ember273: ['test/ember_2_7_3_handlebars_test.js'],
-      ember280: ['test/ember_2_8_0_handlebars_test.js'],
       options: {
         reporter: 'minimal'
       }
@@ -225,9 +221,8 @@ module.exports = function(grunt) {
   // plugin's task(s), then test the result.
   grunt.registerTask('testEmber112', ['shell:bowerEmber112', 'clean', 'emberTemplates', 'nodeunit:ember112']);
   grunt.registerTask('testEmber273', ['shell:bowerEmber273', 'clean', 'emberTemplates', 'nodeunit:ember273']);
-  grunt.registerTask('testEmber280', ['shell:bowerEmber280', 'clean', 'emberTemplates', 'nodeunit:ember280']);
 
-  grunt.registerTask('test', ['testEmber112', 'testEmber273', 'testEmber280']);
+  grunt.registerTask('test', ['testEmber112', 'testEmber273']);
 
   // By default, lint and run all tests.
   grunt.registerTask('default', ['jshint', 'test']);
