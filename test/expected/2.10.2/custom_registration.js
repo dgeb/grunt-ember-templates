@@ -1,0 +1,3 @@
+define('templates/test/fixtures/text', ['ember'], function(Ember) { return Ember.HTMLBars.template({"id":null,"block":"{\"statements\":[[\"text\",\"Basic template that does nothing.\"]],\"locals\":[],\"named\":[],\"yields\":[],\"blocks\":[],\"hasPartials\":false}","meta":{}}); });
+
+define('templates/test/fixtures/simple', ['ember'], function(Ember) { return Ember.HTMLBars.template({"id":null,"block":"{\"statements\":[[\"open-element\",\"p\",[]],[\"flush-element\"],[\"text\",\"Hello, my name is \"],[\"append\",[\"unknown\",[\"name\"]],false],[\"text\",\".\"],[\"close-element\"]],\"locals\":[],\"named\":[],\"yields\":[],\"blocks\":[],\"hasPartials\":false}","meta":{}}); });
