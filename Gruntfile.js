@@ -32,8 +32,9 @@ module.exports = function(grunt) {
       'default': {
         files: {
           'tmp/default.js': ['test/fixtures/text.hbs',
-                             'test/fixtures/simple.hbs',
-                             'test/fixtures/grandparent/parent/child.hbs']
+            'test/fixtures/simple.hbs',
+            'test/fixtures/grandparent/parent/child.hbs'
+          ]
         }
       },
       amd: {
@@ -114,7 +115,7 @@ module.exports = function(grunt) {
       },
       customTemplateName: {
         options: {
-          templateName: function (name) {
+          templateName: function(name) {
             // note: this demonstrates an alternative to specifying the
             //       `templateBasePath` option
             return name.replace(/test\/fixtures\//, '');
@@ -130,7 +131,7 @@ module.exports = function(grunt) {
       },
       customTemplateNameFromFile: {
         options: {
-          templateNameFromFile: function (file) {
+          templateNameFromFile: function(file) {
             // note: this demonstrates an alternative to specifying the
             //       `templateBasePath` and `templateFileExtensions` options
             var name = file.replace(/\.hbs/, '');
@@ -147,7 +148,7 @@ module.exports = function(grunt) {
       },
       minify: {
         options: {
-          preprocess: function (source) {
+          preprocess: function(source) {
             return source.replace(/\s+/g, ' ');
           }
         },
@@ -169,7 +170,7 @@ module.exports = function(grunt) {
       },
       customRegistration: {
         options: {
-          templateRegistration: function (name, content) {
+          templateRegistration: function(name, content) {
             return "define('templates/" + name + "', ['ember'], function(Ember) { return " + content + "; });";
           }
         },
@@ -208,13 +209,6 @@ module.exports = function(grunt) {
           'tmp/dest/slash/': ['test/fixtures/simple.hbs']
         }
       }
-    },
-
-    nodeunit: {
-      'default': ['test/grunt-ember-templates-test.js'],
-      options: {
-        reporter: 'minimal'
-      }
     }
   });
 
@@ -228,7 +222,8 @@ module.exports = function(grunt) {
   var EMBER_VERSIONS = [
     '1.12.2',
     '2.7.3',
-    '2.8.0'
+    '2.10.2',
+    '2.11.0-beta.4'
   ];
 
   var BOWER_TASK_PREFIX = 'bower-install-';
@@ -239,7 +234,7 @@ module.exports = function(grunt) {
    *
    * @param {String} version
    */
-  var runBower = function (version) {
+  var runBower = function(version) {
     var command = 'node_modules/.bin/bower uninstall ember && node_modules/.bin/bower install ember#' + version;
 
     grunt.log.writeln('Running bower install', command);
@@ -247,7 +242,7 @@ module.exports = function(grunt) {
     try {
       var resultBower = execSync(command);
       grunt.log.writeln(resultBower);
-    } catch(e) {
+    } catch (e) {
       grunt.fail.warn(e);
     }
   };
@@ -258,7 +253,7 @@ module.exports = function(grunt) {
    * @param {String} bowerTaskName
    * @param {String} version
    */
-  var generateBowerTask = function (bowerTaskName, version) {
+  var generateBowerTask = function(bowerTaskName, version) {
     grunt.registerTask(bowerTaskName, 'Run bower', function() {
       runBower(version);
     });
@@ -276,7 +271,7 @@ module.exports = function(grunt) {
       try {
         var result = execSync('node_modules/.bin/nodeunit --reporter="minimal"', { encoding: 'utf8' });
         grunt.log.writeln(result);
-      } catch(e) {
+      } catch (e) {
         grunt.fail.warn(e);
       }
     });
