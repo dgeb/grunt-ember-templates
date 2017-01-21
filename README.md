@@ -367,3 +367,32 @@ I created this project as an alternative to grunt-ember-handlebars for the follo
 * 2013/01/24 - v0.3.0 - Grunt 0.3.0 and Handlebars 1.0.rc.2 compatible - thanks @GManzato!
 * 2012/10/11 - v0.2.0 - Renamed grunt-ember-templates from grunt-contrib-ember.
 * 2012/09/28 - v0.1.0 - Initial release.
+
+## Development and test
+
+* Please use Node.js v0.12 for testing and development, so we can keep the backward compatibility. I suppose, you use [`nvm` for managing Node.js versions]((https://github.com/creationix/nvm)) on your computer. `.nvmrc` added to the root folder, so it can jump back to this version when you open this project.
+
+```shell
+$ nvm install 0.12
+```
+
+Install node packages
+
+```shell
+$ npm install
+```
+
+Run tests:
+
+```shell
+$ npm test
+
+or
+
+$ grunt test
+```
+
+**Adding a new Ember version test**
+
+1. Add the new version string to the `EMBER_VERSIONS` constant in `Gruntfile.js`.
+2. Create the expected result files and save in the `test/expected` folder. For example: `test/expected/2.11.0`

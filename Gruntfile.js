@@ -1,10 +1,12 @@
+var execSync = require('child_process').execSync;
+
 module.exports = function(grunt) {
   'use strict';
 
   // Project configuration.
   grunt.initConfig({
     jshint: {
-      all: ['grunt.js', 'tasks/*.js', '<config:nodeunit.tasks>'],
+      all: ['Gruntfile.js', 'tasks/*.js', 'test/grunt-ember-templates-test.js'],
       options: {
         curly: true,
         eqeqeq: true,
@@ -39,9 +41,11 @@ module.exports = function(grunt) {
           amd: true
         },
         files: {
-          'tmp/amd.js': ['test/fixtures/text.hbs',
-                         'test/fixtures/simple.hbs',
-                         'test/fixtures/grandparent/parent/child.hbs']
+          'tmp/amd.js': [
+            'test/fixtures/text.hbs',
+            'test/fixtures/simple.hbs',
+            'test/fixtures/grandparent/parent/child.hbs'
+          ]
         }
       },
       amdStringTrue: {
@@ -49,9 +53,11 @@ module.exports = function(grunt) {
           amd: 'true'
         },
         files: {
-          'tmp/amd_string_true.js': ['test/fixtures/text.hbs',
-                                     'test/fixtures/simple.hbs',
-                                     'test/fixtures/grandparent/parent/child.hbs']
+          'tmp/amd_string_true.js': [
+            'test/fixtures/text.hbs',
+            'test/fixtures/simple.hbs',
+            'test/fixtures/grandparent/parent/child.hbs'
+          ]
         }
       },
       amdCustom: {
@@ -59,9 +65,11 @@ module.exports = function(grunt) {
           amd: 'custom'
         },
         files: {
-          'tmp/amd_custom.js': ['test/fixtures/text.hbs',
-                                'test/fixtures/simple.hbs',
-                                'test/fixtures/grandparent/parent/child.hbs']
+          'tmp/amd_custom.js': [
+            'test/fixtures/text.hbs',
+            'test/fixtures/simple.hbs',
+            'test/fixtures/grandparent/parent/child.hbs'
+          ]
         }
       },
       filePatternMatching: {
@@ -74,8 +82,10 @@ module.exports = function(grunt) {
           templateFileExtensions: /\.hbars/
         },
         files: {
-          'tmp/custom_file_extensions.js': ['test/fixtures/custom_file_extensions/text.hbars',
-                                            'test/fixtures/custom_file_extensions/simple.hbars']
+          'tmp/custom_file_extensions.js': [
+            'test/fixtures/custom_file_extensions/text.hbars',
+            'test/fixtures/custom_file_extensions/simple.hbars'
+          ]
         }
       },
       truncateBasePath: {
@@ -83,9 +93,11 @@ module.exports = function(grunt) {
           templateBasePath: /test\/fixtures\//
         },
         files: {
-          'tmp/truncate_base_path.js': ['test/fixtures/text.hbs',
-                                        'test/fixtures/simple.hbs',
-                                        'test/fixtures/grandparent/parent/child.hbs']
+          'tmp/truncate_base_path.js': [
+            'test/fixtures/text.hbs',
+            'test/fixtures/simple.hbs',
+            'test/fixtures/grandparent/parent/child.hbs'
+          ]
         }
       },
       removeLeadingSlash: {
@@ -93,28 +105,32 @@ module.exports = function(grunt) {
           templateBasePath: /test\/fixtures/
         },
         files: {
-          'tmp/remove_leading_slash.js': ['test/fixtures/text.hbs',
-                                          'test/fixtures/simple.hbs',
-                                          'test/fixtures/grandparent/parent/child.hbs']
+          'tmp/remove_leading_slash.js': [
+            'test/fixtures/text.hbs',
+            'test/fixtures/simple.hbs',
+            'test/fixtures/grandparent/parent/child.hbs'
+          ]
         }
       },
       customTemplateName: {
         options: {
-          templateName: function(name) {
+          templateName: function (name) {
             // note: this demonstrates an alternative to specifying the
             //       `templateBasePath` option
             return name.replace(/test\/fixtures\//, '');
           }
         },
         files: {
-          'tmp/custom_template_name.js': ['test/fixtures/text.hbs',
-                                          'test/fixtures/simple.hbs',
-                                          'test/fixtures/grandparent/parent/child.hbs']
+          'tmp/custom_template_name.js': [
+            'test/fixtures/text.hbs',
+            'test/fixtures/simple.hbs',
+            'test/fixtures/grandparent/parent/child.hbs'
+          ]
         }
       },
       customTemplateNameFromFile: {
         options: {
-          templateNameFromFile: function(file) {
+          templateNameFromFile: function (file) {
             // note: this demonstrates an alternative to specifying the
             //       `templateBasePath` and `templateFileExtensions` options
             var name = file.replace(/\.hbs/, '');
@@ -122,14 +138,16 @@ module.exports = function(grunt) {
           }
         },
         files: {
-          'tmp/custom_template_name_from_file.js': ['test/fixtures/text.hbs',
-                                                    'test/fixtures/simple.hbs',
-                                                    'test/fixtures/grandparent/parent/child.hbs']
+          'tmp/custom_template_name_from_file.js': [
+            'test/fixtures/text.hbs',
+            'test/fixtures/simple.hbs',
+            'test/fixtures/grandparent/parent/child.hbs'
+          ]
         }
       },
       minify: {
         options: {
-          preprocess: function(source) {
+          preprocess: function (source) {
             return source.replace(/\s+/g, ' ');
           }
         },
@@ -142,20 +160,24 @@ module.exports = function(grunt) {
           precompile: false
         },
         files: {
-          'tmp/skip_precompile.js': ['test/fixtures/text.hbs',
-                                     'test/fixtures/simple.hbs',
-                                     'test/fixtures/grandparent/parent/child.hbs']
+          'tmp/skip_precompile.js': [
+            'test/fixtures/text.hbs',
+            'test/fixtures/simple.hbs',
+            'test/fixtures/grandparent/parent/child.hbs'
+          ]
         }
       },
       customRegistration: {
         options: {
-          templateRegistration: function(name, content) {
+          templateRegistration: function (name, content) {
             return "define('templates/" + name + "', ['ember'], function(Ember) { return " + content + "; });";
           }
         },
         files: {
-          'tmp/custom_registration.js': ['test/fixtures/text.hbs',
-                                         'test/fixtures/simple.hbs']
+          'tmp/custom_registration.js': [
+            'test/fixtures/text.hbs',
+            'test/fixtures/simple.hbs'
+          ]
         }
       },
       customTemplateCompiler: {
@@ -179,34 +201,17 @@ module.exports = function(grunt) {
           concatenate: false
         },
         files: {
-          'tmp/dest': ['test/fixtures/text.hbs',
-                       'test/fixtures/simple.hbs'],
+          'tmp/dest': [
+            'test/fixtures/text.hbs',
+            'test/fixtures/simple.hbs'
+          ],
           'tmp/dest/slash/': ['test/fixtures/simple.hbs']
         }
       }
     },
 
-    shell: {
-      bowerEmber112: {
-        command: 'node_modules/.bin/bower uninstall ember && node_modules/.bin/bower install ember#1.12'
-      },
-      bowerEmber273: {
-        command: 'node_modules/.bin/bower uninstall ember && node_modules/.bin/bower install ember#2.7.3'
-      },
-      bowerEmber2102: {
-        command: 'node_modules/.bin/bower uninstall ember && node_modules/.bin/bower install ember#2.10.2'
-      },
-      bowerEmber2110: {
-        command: 'node_modules/.bin/bower uninstall ember && node_modules/.bin/bower install ember#2.11.0-beta.4'
-      }
-    },
-
-    // Unit tests.
     nodeunit: {
-      ember112: ['test/ember_1_12_2_handlebars_test.js'],
-      ember273: ['test/ember_2_7_3_handlebars_test.js'],
-      ember2102: ['test/ember_2_10_2_handlebars_test.js'],
-      ember2110: ['test/ember_2_11_0_handlebars_test.js'],
+      'default': ['test/grunt-ember-templates-test.js'],
       options: {
         reporter: 'minimal'
       }
@@ -219,20 +224,79 @@ module.exports = function(grunt) {
   // The clean plugin helps in testing.
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-nodeunit');
 
-  // Using grunt-shell to install different Ember bower package.
-  grunt.loadNpmTasks('grunt-shell');
+  var EMBER_VERSIONS = [
+    '1.12.2',
+    '2.7.3',
+    '2.8.0'
+  ];
 
-  // Install different Ember versions and run template compiler test.
-  // Whenever the "test" task is run, first clean the "tmp" dir, then run this
-  // plugin's task(s), then test the result.
-  grunt.registerTask('testEmber112', ['shell:bowerEmber112', 'clean', 'emberTemplates', 'nodeunit:ember112']);
-  grunt.registerTask('testEmber273', ['shell:bowerEmber273', 'clean', 'emberTemplates', 'nodeunit:ember273']);
-  grunt.registerTask('testEmber2102', ['shell:bowerEmber2102', 'clean', 'emberTemplates', 'nodeunit:ember2102']);
-  grunt.registerTask('testEmber2110', ['shell:bowerEmber2110', 'clean', 'emberTemplates', 'nodeunit:ember2110']);
+  var BOWER_TASK_PREFIX = 'bower-install-';
+  var NODEUNIT_TASK_PREFIX = 'nodeunit-';
 
-  grunt.registerTask('test', ['testEmber112', 'testEmber273', 'testEmber2102', 'testEmber2110']);
+  /**
+   * Install the determined version of Ember package with bower.
+   *
+   * @param {String} version
+   */
+  var runBower = function (version) {
+    var command = 'node_modules/.bin/bower uninstall ember && node_modules/.bin/bower install ember#' + version;
+
+    grunt.log.writeln('Running bower install', command);
+
+    try {
+      var resultBower = execSync(command);
+      grunt.log.writeln(resultBower);
+    } catch(e) {
+      grunt.fail.warn(e);
+    }
+  };
+
+  /**
+   * Dynamically generates grunt task for running bower install
+   *
+   * @param {String} bowerTaskName
+   * @param {String} version
+   */
+  var generateBowerTask = function (bowerTaskName, version) {
+    grunt.registerTask(bowerTaskName, 'Run bower', function() {
+      runBower(version);
+    });
+  };
+
+  /**
+   * Dynamically generates new nodeunit runner, otherwise nodeunit wouldn't reinitialize the changed filesystem.
+   * Bower install new ember version, template compiler generates new files, so nodeunit has to read these new files.
+   * Using always the same nodeunit taskname wouldn't sync the test source, so only the first test iteration would work.
+   *
+   * @param {String} nodeUnitTaskName
+   */
+  var generateNodeunitTask = function(nodeUnitTaskName) {
+    grunt.registerTask(nodeUnitTaskName, 'Nodeunit sync runner', function() {
+      try {
+        var result = execSync('node_modules/.bin/nodeunit --reporter="minimal"', { encoding: 'utf8' });
+        grunt.log.writeln(result);
+      } catch(e) {
+        grunt.fail.warn(e);
+      }
+    });
+  };
+
+  /**
+   * Dynamically generates tests based on the above determined EMBER_VERSIONS array constant.
+   */
+  grunt.registerTask('test', 'Run tests with different Ember.js version', function() {
+    EMBER_VERSIONS.forEach(function(version) {
+
+      var bowerTaskName = BOWER_TASK_PREFIX + version;
+      var nodeUnitTaskName = NODEUNIT_TASK_PREFIX + version;
+
+      generateBowerTask(bowerTaskName, version);
+      generateNodeunitTask(nodeUnitTaskName);
+
+      grunt.task.run([bowerTaskName, 'clean:test', 'emberTemplates', nodeUnitTaskName]);
+    });
+  });
 
   // By default, lint and run all tests.
   grunt.registerTask('default', ['jshint', 'test']);

@@ -1,7 +1,4 @@
 {
   "name": "grunt-ember-templates",
-  "dependencies": {},
-  "resolutions": {
-    "ember": ""
-  }
+  "dependencies": {}
 }
