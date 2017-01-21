@@ -1,1 +1,0 @@
-Ember.TEMPLATES["test/fixtures/text"] = Ember.HTMLBars.template(Version: WOOT CUSTOM HANDLEBARS - 'Some random text here');
