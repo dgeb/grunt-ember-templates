@@ -30,7 +30,8 @@ function manualCompile(templateCompilerPath, template, grunt){
     module: {},
     exports: {},
     global: {},
-    template: template
+    template: template,
+    mainContext: undefined
   });
 
   // Load the ember template compiler

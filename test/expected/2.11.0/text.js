@@ -1,0 +1,1 @@
+Ember.TEMPLATES["test/fixtures/text"] = Ember.HTMLBars.template({"id":null,"block":"{\"statements\":[[\"text\",\"Basic template that does nothing.\"]],\"locals\":[],\"named\":[],\"yields\":[],\"blocks\":[],\"hasPartials\":false}","meta":{}});
