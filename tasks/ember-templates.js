@@ -31,7 +31,8 @@ function manualCompile(templateCompilerPath, template, grunt){
     exports: {},
     global: {},
     template: template,
-    mainContext: undefined
+    mainContext: undefined,
+    setTimeout: setTimeout
   });
 
   // Load the ember template compiler
@@ -136,7 +137,8 @@ module.exports = function(grunt) {
           });
 
         } catch(e) {
-          grunt.log.error(e);
+          grunt.log.error(e.message);
+          grunt.log.error(e.stack);
           grunt.fail.warn('Ember Handlebars failed to compile ' + file + '.');
         }
       });

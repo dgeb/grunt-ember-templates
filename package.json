@@ -26,7 +26,8 @@
     "node": ">= 0.12.0"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt test",
+    "debug": "node --inspect-brk $(which grunt) emberTemplates --debug"
   },
   "devDependencies": {
     "bower": "~1.8.2",
