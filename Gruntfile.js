@@ -223,7 +223,8 @@ module.exports = function(grunt) {
     '1.12.2',
     '2.7.3',
     '2.10.2',
-    '2.11.0'
+    '2.11.0',
+    '2.17.0'
   ];
 
   var BOWER_TASK_PREFIX = 'bower-install-';
