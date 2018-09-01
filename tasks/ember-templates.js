@@ -144,11 +144,15 @@ module.exports = function(grunt) {
       });
 
       if (options.concatenate) {
-        // Map over the 'contents' property and concatenate
-        output = output.concat(
-          processedTemplates.map(function(template) {
-            return template.contents;
-          }));
+        if (typeof options.concatenate === 'function') {
+          output = options.concatenate(output, processedTemplates);
+        } else {
+          // Map over the 'contents' property and concatenate
+          output = output.concat(
+            processedTemplates.map(function(template) {
+              return template.contents;
+            }));
+        }
 
         writeFile(output, f.dest, options);
 

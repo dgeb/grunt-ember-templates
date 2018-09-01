@@ -99,7 +99,7 @@ options: {
 
 ##### concatenate
 
-Type: `boolean`
+Type: `boolean` or `function`
 Default: `true`
 
 Disable this option to compile the templates to multiple individual files,
@@ -116,6 +116,21 @@ options: {
 },
 files: {
   "path/to/destination/folder": ["path/to/sources/*.handlebars", "path/to/more/*.handlebars"]
+}
+```
+
+Alternatively, you can specify your own function to do the concatenation. Here's
+an example that wraps the output in an IIFE:
+
+``` javascript
+options: {
+  concatenate: function(output, processedTemplates) {
+    output = output.concat('(function(){');
+    return output.concat(
+      processedTemplates.map(function (template) {
+        return template.contents;
+      })).concat('})();');
+  }
 }
 ```
 

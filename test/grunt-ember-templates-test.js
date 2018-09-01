@@ -177,5 +177,16 @@ exports.default = {
     test.equal(actual, expected, desc);
 
     test.done();
+  },
+  concatenate_function: function (test) {
+    'use strict';
+    test.expect(1);
+
+    var actual = grunt.file.read('tmp/concatenate_function.js');
+    var expected = grunt.file.read('test/expected/' + this.version + '/default.js');
+    expected = '(function(){\n\n' + expected + '\n\n})();';
+    test.equal(actual, expected, 'should compile handlebars templates using default settings');
+
+    test.done();
   }
 };
