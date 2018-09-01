@@ -31,7 +31,8 @@ module.exports = function(grunt) {
     emberTemplates: {
       'default': {
         files: {
-          'tmp/default.js': ['test/fixtures/text.hbs',
+          'tmp/default.js': [
+            'test/fixtures/text.hbs',
             'test/fixtures/simple.hbs',
             'test/fixtures/grandparent/parent/child.hbs'
           ]
@@ -207,6 +208,24 @@ module.exports = function(grunt) {
             'test/fixtures/simple.hbs'
           ],
           'tmp/dest/slash/': ['test/fixtures/simple.hbs']
+        }
+      },
+      concatenateFunction: {
+        options: {
+          concatenate: function(output, processedTemplates) {
+            output = output.concat('(function(){');
+            return output.concat(
+              processedTemplates.map(function (template) {
+                return template.contents;
+              })).concat('})();');
+          }
+        },
+        files: {
+          'tmp/concatenate_function.js': [
+            'test/fixtures/text.hbs',
+            'test/fixtures/simple.hbs',
+            'test/fixtures/grandparent/parent/child.hbs'
+          ]
         }
       }
     }
